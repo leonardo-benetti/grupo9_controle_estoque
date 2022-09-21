@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>grupo9_controle_estoque</id>
+    <version>1.0.0</version>
+    <authors>grupo9_controle_estoque</authors>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework="net6.0-windows7.0" />
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework="net6.0-windows7.0">
+        <frameworkReference name="Microsoft.WindowsDesktop.App.WPF" />
+      </group>
+    </frameworkReferences>
+  </metadata>
+  <files>
+    <file src="D:\User\CTEDS\grupo9_controle_estoque\bin\Debug\net6.0-windows\grupo9_controle_estoque.runtimeconfig.json" target="lib\net6.0-windows7.0\grupo9_controle_estoque.runtimeconfig.json" />
+    <file src="D:\User\CTEDS\grupo9_controle_estoque\bin\Debug\net6.0-windows\grupo9_controle_estoque.dll" target="lib\net6.0-windows7.0\grupo9_controle_estoque.dll" />
+  </files>
+</package>
