@@ -52,7 +52,8 @@
                         <DataGridTemplateColumn Header="Selecionar">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Content="Selecionar" Click="SelectProductToEdit"/>
+                                    <Button Content="Selecionar"/>
+                                            <!--Click="SelectProduct"-->
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -71,7 +72,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <!-- user data -->
-                <RowDefinition Height="210"/>
+                <RowDefinition Height="200"/>
                 <!-- control -->
                 <RowDefinition Height="30"/>
                 <!-- user footer-->
@@ -94,7 +95,7 @@
 
             <Border Grid.Row="1" Margin="5" BorderThickness="1" BorderBrush="Black">
                 <StackPanel Margin="5" VerticalAlignment="Bottom">
-                    <Label Content="Prouto selecionado" FontSize="10" HorizontalAlignment="Center"/>
+                    <Label Content="Inserir Produto" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center"/>
                     <Grid Name="SelectedProductGrid">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
@@ -113,8 +114,8 @@
                         <Label Grid.Row="0" FontSize="10" Grid.Column="0" Content="Nome"/>
                         <TextBox Grid.Row="0" FontSize="10" Grid.Column="1" Text="{Binding Name}"/>
 
-                        <Label Grid.Row="1" FontSize="10" Grid.Column="0" Content="Categoria"/>
-                        <TextBox Grid.Row="1" FontSize="10" Grid.Column="1" Text="{Binding Category}"/>
+                        <Label Grid.Row="1" FontSize="10" Grid.Column="0" Content="Descrição"/>
+                        <TextBox Grid.Row="1" FontSize="10" Grid.Column="1" Text="{Binding Description}"/>
 
                         <Label Grid.Row="2" FontSize="10" Grid.Column="0" Content="Preço"/>
                         <TextBox Grid.Row="2" FontSize="10" Grid.Column="1" Text="{Binding Price}"/>
@@ -122,23 +123,14 @@
                         <Label Grid.Row="3" FontSize="10" Grid.Column="0" Content="Quantidade"/>
                         <TextBox Grid.Row="3" FontSize="10" Grid.Column="1" Text="{Binding Quantity}"/>
 
-                        <Button Grid.Row="4" FontSize="10" Grid.Column="0" Width="150" Content="Comprar"
-                                Margin="10"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"/>
-                        <!--Click="BuyProduct"-->
+                        <Label Grid.Row="4" FontSize="10" Grid.Column="0" Content="Categoria"/>
+                        <TextBox Grid.Row="3" FontSize="10" Grid.Column="1" Text="{Binding Category}"/>
 
-                        <Button Grid.Row="4" FontSize="10" Grid.Column="1" Width="150" Content="Vender"
+                        <Button Grid.Row="5" FontSize="10" Grid.ColumnSpan="2" Width="80" Content="Adicionar"
                                 Margin="10"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"/>
-                        <!--Click="SellProduct"-->
-
-                        <Button Grid.Row="5" FontSize="10" Grid.Column="1" Width="150" Content="Editar"
-                                Margin="10"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"/>
-                        <!--Click="EditProduct"-->
+                                <!--Click="AddProduct"-->
 
                     </Grid>
 
