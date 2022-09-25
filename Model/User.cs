@@ -25,6 +25,17 @@ public class User
     [Column(TypeName = "VARCHAR(150)")]
     public string Profile_pic { get; set; } = string.Empty;
 
+    public User()
+    {
+
+    }
+    public User(string Name, string Password)
+    {
+        this.Name = Name;
+        this.Pwd_salt = generateSalt();
+        this.Pwd_hash = hashPassword(this.Pwd_salt, Password);
+        this.Profile_pic = "";
+    }
     public static string generateSalt()
     {
         byte[] buffer = RandomNumberGenerator.GetBytes(8);
@@ -41,4 +52,5 @@ public class User
 
         return BitConverter.ToString(output).Replace("-","");
     }
+
 }

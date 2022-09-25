@@ -12,16 +12,37 @@ public partial class MainWindow : Window
     private readonly ApplicationDbContext context;
     private readonly UserController UserController;
     private readonly ProductCrontroller ProductCrontroller;
+    private string login;
+    private string userLogon;
+    private string passLogon;
     Product NewProduct = new();
     Product selectedProduct = new();
     public MainWindow(ApplicationDbContext context)
     {
         this.context = context;
-        InitializeComponent();
         this.UserController = new UserController(context);
         this.ProductCrontroller = new ProductCrontroller(context);
+        this.login = "";
+        this.userLogon = "";
+        this.passLogon = "";
+        InitializeComponent();
         GetProducts();
         GetUsers();
+    }
+    private Product fakeNewProduct()
+    {
+        return new Product()
+        {
+            Name = "TESTE",
+            Description = "123",
+            Price = 1000,
+            Quantity = 10
+        };
+
+    }
+    private User fakeNewUser()
+    {
+        return new User("TESTE_USER", "123");
     }
     private void GetProducts()
     {
@@ -31,23 +52,48 @@ public partial class MainWindow : Window
     {
         //UserDataGrid.ItemsSource = this.UserController.GetUsers();
     }
-
-    private void SelectProductToEdit(object s, RoutedEventArgs e)
+    private void EditProduct(object s, RoutedEventArgs e)
     {
-        throw new System.Exception("Funções não implementada");
+        NewProduct = fakeNewProduct();
+        selectedProduct = (s as FrameworkElement).DataContext as Product;
+        this.ProductCrontroller.EditProduct(selectedProduct.GUID, NewProduct);
+        NewProduct = new Product();
+        GetProducts();
     }
 
     private void DeleteProduct(object s, RoutedEventArgs e)
     {
         var productToDelete = (s as FrameworkElement).DataContext as Product;
-        context.Products.Remove(productToDelete);
-        context.SaveChanges();
+        this.ProductCrontroller.DeleteProduct(productToDelete);
         GetProducts();
     }
-
+    private void AddItem(object s, RoutedEventArgs e)
+    {
+        NewProduct = fakeNewProduct();
+        this.ProductCrontroller.AddItem(NewProduct);
+        GetProducts();
+        NewProduct = new Product();
+    }
     private void ProductDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
     {
 
+    }
+    private void AddUser(object s, RoutedEventArgs e)
+    {
+        User newUser = fakeNewUser();
+        this.UserController.CreateUser(newUser);
+        GetUsers();
+    }
+
+    private void logon(object s, RoutedEventArgs e)
+    {
+        bool logon = this.UserController.Logon(this.userLogon, this.passLogon);
+        if (logon)
+        {
+            this.login = this.userLogon;
+        }
+        this.userLogon = "";
+        this.passLogon = "";
     }
 }
 
