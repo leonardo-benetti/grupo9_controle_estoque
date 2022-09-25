@@ -24,7 +24,7 @@ internal class UserController
     public void CreateUser(User newUser)
     {
         this.Users.Add(newUser);
-        GetUsers();
+        this.context.SaveChanges();
     }
 
 }
