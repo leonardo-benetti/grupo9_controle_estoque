@@ -26,5 +26,9 @@ internal class UserController
         this.Users.Add(newUser);
         this.context.SaveChanges();
     }
-
+    public void DeleteUser(User userToDelete)
+    {
+        this.Users.Remove(userToDelete);
+        context.SaveChanges();
+    }
 }
