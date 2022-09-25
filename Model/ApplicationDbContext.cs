@@ -22,8 +22,8 @@ public class ApplicationDbContext : DbContext
         }
     }
 
-    public virtual DbSet<User> Users { get; set; }
-    public virtual DbSet<Product> Products { get; set; }
+    public DbSet<User> Users { get; set; }
+    public DbSet<Product> Products { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

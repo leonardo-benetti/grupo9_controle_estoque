@@ -7,6 +7,45 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Content="Teste"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45" />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Content="Products"/>
+        <DataGrid x:Name="ProductDataGrid" AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="1" ColumnWidth="*" Margin="20" IsSynchronizedWithCurrentItem="True" SelectionChanged="ProductDataGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Product Id" Binding="{Binding GUID}"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
+                <DataGridTextColumn Header="Price" Binding="{Binding Price}"/>
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}"/>
+                <DataGridTextColumn Header="Category" Binding="{Binding Category}"/>
+                
+                <DataGridTemplateColumn Header="Edit">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Edit" Click="SelectProductToEdit"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+                <DataGridTemplateColumn Header="Delete">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Delete" Click="DeleteProduct"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Content="Products"/>
+        <DataGrid x:Name="UserDataGrid" AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="2" ColumnWidth="*" Margin="20" IsSynchronizedWithCurrentItem="True" SelectionChanged="ProductDataGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="User Id" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>
