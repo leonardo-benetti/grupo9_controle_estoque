@@ -23,14 +23,6 @@ public partial class MainWindow : Window
         GetProducts();
         GetUsers();
     }
-    private void GetProducts()
-    {
-        ProductDataGrid.ItemsSource = this.ProductCrontroller.GetProducts();
-    }
-    private void GetUsers()
-    {
-        UserDataGrid.ItemsSource = this.UserController.GetUsers();
-    }
     private Product fakeNewProduct()
     {
         return new Product()
@@ -41,6 +33,18 @@ public partial class MainWindow : Window
             Quantity = 10
         };
 
+    }
+    private User fakeNewUser()
+    {
+        return new User("TESTE_USER", "123");
+    }
+    private void GetProducts()
+    {
+        ProductDataGrid.ItemsSource = this.ProductCrontroller.GetProducts();
+    }
+    private void GetUsers()
+    {
+        UserDataGrid.ItemsSource = this.UserController.GetUsers();
     }
     private void EditProduct(object s, RoutedEventArgs e)
     {
@@ -67,6 +71,12 @@ public partial class MainWindow : Window
     private void ProductDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
     {
 
+    }
+    private void AddUser(object s, RoutedEventArgs e)
+    {
+        User newUser = fakeNewUser();
+        this.UserController.CreateUser(newUser);
+        GetUsers();
     }
 }
 
