@@ -12,14 +12,20 @@ public partial class MainWindow : Window
     private readonly ApplicationDbContext context;
     private readonly UserController UserController;
     private readonly ProductCrontroller ProductCrontroller;
+    private string login;
+    private string userLogon;
+    private string passLogon;
     Product NewProduct = new();
     Product selectedProduct = new();
     public MainWindow(ApplicationDbContext context)
     {
         this.context = context;
-        InitializeComponent();
         this.UserController = new UserController(context);
         this.ProductCrontroller = new ProductCrontroller(context);
+        this.login = "";
+        this.userLogon = "";
+        this.passLogon = "";
+        InitializeComponent();
         GetProducts();
         GetUsers();
     }
@@ -77,6 +83,17 @@ public partial class MainWindow : Window
         User newUser = fakeNewUser();
         this.UserController.CreateUser(newUser);
         GetUsers();
+    }
+
+    private void logon(object s, RoutedEventArgs e)
+    {
+        bool logon = this.UserController.Logon(this.userLogon, this.passLogon);
+        if (logon)
+        {
+            this.login = this.userLogon;
+        }
+        this.userLogon = "";
+        this.passLogon = "";
     }
 }
 
