@@ -13,6 +13,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Label Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Content="Products"/>
+        <Button Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Click="AddItem" Content="Add Product" Margin="5" />
         <DataGrid x:Name="ProductDataGrid" AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="1" ColumnWidth="*" Margin="20" IsSynchronizedWithCurrentItem="True" SelectionChanged="ProductDataGrid_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Product Id" Binding="{Binding GUID}"/>
@@ -21,15 +22,15 @@
                 <DataGridTextColumn Header="Price" Binding="{Binding Price}"/>
                 <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}"/>
                 <DataGridTextColumn Header="Category" Binding="{Binding Category}"/>
-                
+
                 <DataGridTemplateColumn Header="Edit">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Edit" Click="SelectProductToEdit"/>
+                            <Button Content="Edit" Click="EditProduct"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                
+
                 <DataGridTemplateColumn Header="Delete">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -37,7 +38,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                
+
             </DataGrid.Columns>
         </DataGrid>
         <Label Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Content="Products"/>

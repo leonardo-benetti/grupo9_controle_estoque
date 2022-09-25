@@ -31,20 +31,39 @@ public partial class MainWindow : Window
     {
         UserDataGrid.ItemsSource = this.UserController.GetUsers();
     }
-
-    private void SelectProductToEdit(object s, RoutedEventArgs e)
+    private Product fakeNewProduct()
     {
-        throw new System.Exception("Funções não implementada");
+        return new Product()
+        {
+            Name = "TESTE",
+            Description = "123",
+            Price = 1000,
+            Quantity = 10
+        };
+
+    }
+    private void EditProduct(object s, RoutedEventArgs e)
+    {
+        NewProduct = fakeNewProduct();
+        selectedProduct = (s as FrameworkElement).DataContext as Product;
+        this.ProductCrontroller.EditProduct(selectedProduct.GUID, NewProduct);
+        NewProduct = new Product();
+        GetProducts();
     }
 
     private void DeleteProduct(object s, RoutedEventArgs e)
     {
         var productToDelete = (s as FrameworkElement).DataContext as Product;
-        context.Products.Remove(productToDelete);
-        context.SaveChanges();
+        this.ProductCrontroller.DeleteProduct(productToDelete);
         GetProducts();
     }
-
+    private void AddItem(object s, RoutedEventArgs e)
+    {
+        NewProduct = fakeNewProduct();
+        this.ProductCrontroller.AddItem(NewProduct);
+        GetProducts();
+        NewProduct = new Product();
+    }
     private void ProductDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
     {
 
