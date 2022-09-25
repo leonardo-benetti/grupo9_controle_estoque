@@ -5,50 +5,147 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:grupo9_controle_estoque"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Controle de Estoque" Height="600" Width="1100"
+        ResizeMode="NoResize">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="45" />
-            <RowDefinition />
-            <RowDefinition Height="45" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <Label Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Content="Products"/>
-        <Button Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Click="AddItem" Content="Add Product" Margin="5" />
-        <DataGrid x:Name="ProductDataGrid" AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="1" ColumnWidth="*" Margin="20" IsSynchronizedWithCurrentItem="True" SelectionChanged="ProductDataGrid_SelectionChanged">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Product Id" Binding="{Binding GUID}"/>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
-                <DataGridTextColumn Header="Price" Binding="{Binding Price}"/>
-                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}"/>
-                <DataGridTextColumn Header="Category" Binding="{Binding Category}"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
 
-                <DataGridTemplateColumn Header="Edit">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Content="Edit" Click="EditProduct"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+        <Border Grid.Column="0" BorderThickness="1" BorderBrush="Black"/>
+        <Border Grid.Column="1" BorderThickness="1" BorderBrush="Black"/>
 
-                <DataGridTemplateColumn Header="Delete">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Content="Delete" Click="DeleteProduct"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/> <!-- title -->
+                <RowDefinition/> <!-- data -->
+                <RowDefinition Height="30"/> <!-- data footer-->
+            </Grid.RowDefinitions>
 
-            </DataGrid.Columns>
-        </DataGrid>
-        <Label Grid.Row="2"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Content="Users"/>
-        <Button Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Click="AddUser" Content="Add User" Margin="5" />
-        <DataGrid x:Name="UserDataGrid" AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="3" ColumnWidth="*" Margin="20" IsSynchronizedWithCurrentItem="True" SelectionChanged="ProductDataGrid_SelectionChanged">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="User Id" Binding="{Binding Id}"/>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
-            </DataGrid.Columns>
-        </DataGrid>
+            <Label FontSize="18" 
+               HorizontalAlignment="Left"
+               VerticalAlignment="Center"
+               Margin="5"
+               Grid.Row="0"
+               Content="Produtos em estoque"/>
+
+
+            <StackPanel Grid.Row="1" Margin="5">
+                <DataGrid x:Name="ProductDataGrid" AutoGenerateColumns="False" IsReadOnly="True"
+                              ColumnWidth="*" Margin="5" IsSynchronizedWithCurrentItem="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Nome" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Header="Categoria" Binding="{Binding Category}"/>
+                        <DataGridTextColumn Header="Preço" Binding="{Binding Price}"/>
+                        <DataGridTextColumn Header="Quantidade" Binding="{Binding Quantity}"/>
+
+                        <DataGridTemplateColumn Header="Ver descrição">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="?" />
+                                    <!--Click="SelectProductToSeeDescription"-->
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Selecionar">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Selecionar"/>
+                                            <!--Click="SelectProduct"-->
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+
+            <Label Grid.Row="2"
+                   FontSize="10" Content="Data Footer"
+                   HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <!-- user data -->
+                <RowDefinition Height="200"/>
+                <!-- control -->
+                <RowDefinition Height="30"/>
+                <!-- user footer-->
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0">
+                <!--https://www.c-sharpcorner.com/UploadFile/mahesh/using-xaml-image-in-wpf/-->
+                <Image Name="MainWindowProfilePic" Grid.Row="0"
+                    Height="80" Width="80"
+                    Margin="5,10,5,5"
+                />
+
+                <Border Margin="10,5,10,5" BorderThickness="1" BorderBrush="Black">
+                    <TextBlock Name="MainWindowUserName" Padding="0,5,0,5" HorizontalAlignment="Center" Text="Sample user name"/>
+                </Border>
+
+                <Button Name="UserLogoutButton" Content="Logout" Width="50" Margin="0,5,0,5"/>
+
+            </StackPanel>
+
+            <Border Grid.Row="1" Margin="5" BorderThickness="1" BorderBrush="Black">
+                <StackPanel Margin="5" VerticalAlignment="Bottom">
+                    <Label Content="Inserir Produto" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    <Grid Name="SelectedProductGrid">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="0" FontSize="10" Grid.Column="0" Content="Nome"/>
+                        <TextBox Grid.Row="0" FontSize="10" Grid.Column="1" Text="{Binding Name}"/>
+
+                        <Label Grid.Row="1" FontSize="10" Grid.Column="0" Content="Descrição"/>
+                        <TextBox Grid.Row="1" FontSize="10" Grid.Column="1" Text="{Binding Description}"/>
+
+                        <Label Grid.Row="2" FontSize="10" Grid.Column="0" Content="Preço"/>
+                        <TextBox Grid.Row="2" FontSize="10" Grid.Column="1" Text="{Binding Price}"/>
+
+                        <Label Grid.Row="3" FontSize="10" Grid.Column="0" Content="Quantidade"/>
+                        <TextBox Grid.Row="3" FontSize="10" Grid.Column="1" Text="{Binding Quantity}"/>
+
+                        <Label Grid.Row="4" FontSize="10" Grid.Column="0" Content="Categoria"/>
+                        <TextBox Grid.Row="3" FontSize="10" Grid.Column="1" Text="{Binding Category}"/>
+
+                        <Button Grid.Row="5" FontSize="10" Grid.ColumnSpan="2" Width="80" Content="Adicionar"
+                                Margin="10"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"/>
+                                <!--Click="AddProduct"-->
+
+                    </Grid>
+
+                </StackPanel>
+            </Border>
+
+            <Button Grid.Row="2"
+                   Name="MainWindowHelpButton"
+                   Content="Ajuda"
+                   FontSize="10"
+                   VerticalContentAlignment="Center"
+                   HorizontalContentAlignment="Center"
+                   HorizontalAlignment="Right"
+                   Margin="0,0,5,5"/>
+
+        </Grid>
     </Grid>
 </Window>

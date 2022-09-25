@@ -50,7 +50,7 @@ public partial class MainWindow : Window
     }
     private void GetUsers()
     {
-        UserDataGrid.ItemsSource = this.UserController.GetUsers();
+        //UserDataGrid.ItemsSource = this.UserController.GetUsers();
     }
     private void EditProduct(object s, RoutedEventArgs e)
     {
