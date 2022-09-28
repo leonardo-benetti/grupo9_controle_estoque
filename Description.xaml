@@ -1,0 +1,35 @@
+﻿<Window x:Class="grupo9_controle_estoque.Description"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:grupo9_controle_estoque"
+        mc:Ignorable="d"
+        Title="Description" Height="200" Width="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition/>
+            <RowDefinition Height="35"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" BorderThickness="1" BorderBrush="Black"/>
+
+        <Label FontSize="18" 
+               FontWeight="Bold"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               Margin="1"
+               Grid.Row="0"
+               Content="Descrição Produto"/>
+        
+        <Grid Grid.Row="1" Name="ProductTextGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" BorderThickness="1" BorderBrush="Black">
+                <TextBlock FontSize="16" Padding="0,5,0,5" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Description}"/>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,5 +1,6 @@
 ﻿using grupo9_controle_estoque.Model;
 using grupo9_controle_estoque.Controller;
+using grupo9_controle_estoque;
 using System.Linq;
 using System.Windows;
 
@@ -95,6 +96,12 @@ public partial class MainWindow : Window
         }
         this.userLogon = "";
         this.passLogon = "";
+    }
+    private void SelectProductToSeeDescription(object s, RoutedEventArgs e)
+    {
+        var productDescription = (s as FrameworkElement).DataContext as Product;
+        Description windowDescription = new Description(productDescription);
+        windowDescription.Show();
     }
 }
 

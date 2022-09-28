@@ -40,16 +40,15 @@
                         <DataGridTextColumn Header="Preço" Binding="{Binding Price}"/>
                         <DataGridTextColumn Header="Quantidade" Binding="{Binding Quantity}"/>
 
-                        <DataGridTemplateColumn Header="Ver descrição">
+                        <DataGridTemplateColumn Header="Ver descrição" MaxWidth="80">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Content="?" />
-                                    <!--Click="SelectProductToSeeDescription"-->
+                                    <Button Content="?" Click="SelectProductToSeeDescription"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Selecionar">
+                        <DataGridTemplateColumn Header="Selecionar" MaxWidth="80">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button Content="Selecionar"/>
@@ -58,6 +57,13 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
+                        <DataGridTemplateColumn Header="Deletar" MaxWidth="80">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Deletar" Click="DeleteProduct"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
 
                     </DataGrid.Columns>
                 </DataGrid>
