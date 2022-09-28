@@ -28,6 +28,7 @@ public partial class MainWindow : Window
         InitializeComponent();
         GetProducts();
         GetUsers();
+        AddItemGrid.DataContext = NewProduct;
     }
     private Product fakeNewProduct()
     {
@@ -69,10 +70,10 @@ public partial class MainWindow : Window
     }
     private void AddItem(object s, RoutedEventArgs e)
     {
-        NewProduct = fakeNewProduct();
         this.ProductCrontroller.AddItem(NewProduct);
         GetProducts();
         NewProduct = new Product();
+        AddItemGrid.DataContext = NewProduct;
     }
     private void ProductDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
     {
