@@ -96,7 +96,7 @@
             <Border Grid.Row="1" Margin="5" BorderThickness="1" BorderBrush="Black">
                 <StackPanel Margin="5" VerticalAlignment="Bottom">
                     <Label Content="Inserir Produto" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center"/>
-                    <Grid Name="SelectedProductGrid">
+                    <Grid Name="AddItemGrid">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
@@ -124,13 +124,13 @@
                         <TextBox Grid.Row="3" FontSize="10" Grid.Column="1" Text="{Binding Quantity}"/>
 
                         <Label Grid.Row="4" FontSize="10" Grid.Column="0" Content="Categoria"/>
-                        <TextBox Grid.Row="3" FontSize="10" Grid.Column="1" Text="{Binding Category}"/>
+                        <TextBox Grid.Row="4" FontSize="10" Grid.Column="1" Text="{Binding Category}"/>
 
                         <Button Grid.Row="5" FontSize="10" Grid.ColumnSpan="2" Width="80" Content="Adicionar"
                                 Margin="10"
                                 HorizontalAlignment="Center"
-                                VerticalAlignment="Center"/>
-                                <!--Click="AddProduct"-->
+                                VerticalAlignment="Center"
+                                Click="AddItem"/>
 
                     </Grid>
 
