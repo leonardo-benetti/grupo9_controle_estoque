@@ -103,5 +103,12 @@ public partial class MainWindow : Window
         Description windowDescription = new Description(productDescription);
         windowDescription.Show();
     }
+
+    private void SelectProductToEdit(object s, RoutedEventArgs e)
+    {
+        var productToEdit = (s as FrameworkElement).DataContext as Product;
+        EditWindow editWindow = new EditWindow(productToEdit);
+        editWindow.Show();
+    }
 }
 
