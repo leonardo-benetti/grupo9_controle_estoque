@@ -20,7 +20,7 @@
                Margin="1"
                Grid.Row="0"
                Content="Editar Produto"/>
-        
+
         <StackPanel Grid.Row="1">
             <DataGrid x:Name="ProductEditGrid" AutoGenerateColumns="False" IsReadOnly="True"
                               ColumnWidth="*" Margin="5" IsSynchronizedWithCurrentItem="True">
@@ -32,7 +32,14 @@
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" HorizontalAlignment="Right" Content="Salvar" Width="70" Height="25" Margin="10,10,30,10" Click="SaveChanges"/>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Content="Cancelar" Width="70" Height="25" Margin="30,10,10,10" Click="DiscartChanges"/>
+        </Grid>
 
-        <Button Grid.Row="2" Content="Salvar" Width="50" Height="25" Margin="10"/>
     </Grid>
 </Window>
