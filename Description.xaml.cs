@@ -20,5 +20,9 @@ namespace grupo9_controle_estoque
             InitializeComponent();
             ProductTextGrid.DataContext = product;       
         }
+        private void CloseDescription(object s, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
