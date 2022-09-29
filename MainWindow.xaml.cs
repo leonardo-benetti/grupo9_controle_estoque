@@ -13,9 +13,17 @@ public partial class MainWindow : Window
     private readonly ApplicationDbContext context;
     private readonly UserController UserController;
     private readonly ProductCrontroller ProductCrontroller;
-    private string login;
-    private string userLogon;
-    private string passLogon;
+
+    private bool isLogedIn = false;
+
+    private class LoginAttempt
+    {
+        public string Name { get; set; } = string.Empty;
+        public string Pwd { get; set; } = string.Empty;
+    }
+
+    private LoginAttempt loginAttempt = new();
+
     Product NewProduct = new();
     Product selectedProduct = new();
     public MainWindow(ApplicationDbContext context)
@@ -23,13 +31,11 @@ public partial class MainWindow : Window
         this.context = context;
         this.UserController = new UserController(context);
         this.ProductCrontroller = new ProductCrontroller(context);
-        this.login = "";
-        this.userLogon = "";
-        this.passLogon = "";
         InitializeComponent();
         GetProducts();
-        GetUsers();
         AddItemGrid.DataContext = NewProduct;
+        LoginForm.DataContext = loginAttempt;
+        MainWindowUserName.Text = loginAttempt.Name;
     }
     private Product fakeNewProduct()
     {
@@ -50,10 +56,7 @@ public partial class MainWindow : Window
     {
         ProductDataGrid.ItemsSource = this.ProductCrontroller.GetProducts();
     }
-    private void GetUsers()
-    {
-        //UserDataGrid.ItemsSource = this.UserController.GetUsers();
-    }
+
     private void EditProduct(object s, RoutedEventArgs e)
     {
         NewProduct = fakeNewProduct();
@@ -82,20 +85,41 @@ public partial class MainWindow : Window
     }
     private void AddUser(object s, RoutedEventArgs e)
     {
-        User newUser = fakeNewUser();
-        this.UserController.CreateUser(newUser);
-        GetUsers();
+        bool success = this.UserController.CreateUser(loginAttempt.Name, loginAttempt.Pwd);
+        if (success)
+        {
+            this.isLogedIn = true;
+            UserControlLoggedOff.Visibility = Visibility.Collapsed;
+            UserControlLoggedIn.Visibility = Visibility.Visible;
+            return;
+        }
+        loginAttempt = new();
+        LoginForm.DataContext = loginAttempt;
     }
 
-    private void logon(object s, RoutedEventArgs e)
+    private void TryLogin(object sender, RoutedEventArgs e)
     {
-        bool logon = this.UserController.Logon(this.userLogon, this.passLogon);
-        if (logon)
+        bool success = this.UserController.Logon(loginAttempt.Name, loginAttempt.Pwd);
+        if (success)
         {
-            this.login = this.userLogon;
+            this.isLogedIn = true;
+            UserControlLoggedOff.Visibility = Visibility.Collapsed;
+            UserControlLoggedIn.Visibility = Visibility.Visible;
+            MainWindowUserName.Text = loginAttempt.Name;
+            return;
         }
-        this.userLogon = "";
-        this.passLogon = "";
+        loginAttempt = new();
+        LoginForm.DataContext = loginAttempt;
+    }
+
+    private void Logout(object sender, RoutedEventArgs e)
+    {
+        loginAttempt = new();
+        LoginForm.DataContext = loginAttempt;
+        MainWindowUserName.Text = loginAttempt.Name;
+        this.isLogedIn = false;
+        UserControlLoggedIn.Visibility = Visibility.Collapsed;
+        UserControlLoggedOff.Visibility = Visibility.Visible;
     }
     private void SelectProductToSeeDescription(object s, RoutedEventArgs e)
     {
