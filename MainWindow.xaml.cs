@@ -1,5 +1,6 @@
 ﻿using grupo9_controle_estoque.Model;
 using grupo9_controle_estoque.Controller;
+using grupo9_controle_estoque;
 using System.Linq;
 using System.Windows;
 
@@ -119,6 +120,19 @@ public partial class MainWindow : Window
         this.isLogedIn = false;
         UserControlLoggedIn.Visibility = Visibility.Collapsed;
         UserControlLoggedOff.Visibility = Visibility.Visible;
+    }
+    private void SelectProductToSeeDescription(object s, RoutedEventArgs e)
+    {
+        var productDescription = (s as FrameworkElement).DataContext as Product;
+        Description windowDescription = new Description(productDescription);
+        windowDescription.Show();
+    }
+
+    private void SelectProductToEdit(object s, RoutedEventArgs e)
+    {
+        var productToEdit = (s as FrameworkElement).DataContext as Product;
+        EditWindow editWindow = new EditWindow(productToEdit);
+        editWindow.Show();
     }
 }
 

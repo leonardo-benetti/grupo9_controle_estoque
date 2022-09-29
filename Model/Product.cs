@@ -18,10 +18,10 @@ public class Product
     public string Description { get; set; } = string.Empty;
 
     [Column(TypeName = "FLOAT")]
-    public float Price { get; set; }
+    public float? Price { get; set; } = null;
 
     [Column(TypeName = "INT")]
-    public int Quantity { get; set; }
+    public int? Quantity { get; set; } = null;
 
     [Column(TypeName = "VARCHAR(150)")]
     public string Category { get; set; } = string.Empty;
