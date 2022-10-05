@@ -12,7 +12,7 @@ public partial class MainWindow : Window
 {
     private readonly ApplicationDbContext context;
     private readonly UserController UserController;
-    private readonly ProductCrontroller ProductCrontroller;
+    private readonly ProductController ProductCrontroller;
 
     private bool isLogedIn = false;
 
@@ -30,7 +30,7 @@ public partial class MainWindow : Window
     {
         this.context = context;
         this.UserController = new UserController(context);
-        this.ProductCrontroller = new ProductCrontroller(context);
+        this.ProductCrontroller = new ProductController(context);
         InitializeComponent();
         GetProducts();
         AddItemGrid.DataContext = NewProduct;
@@ -132,7 +132,7 @@ public partial class MainWindow : Window
     private void SelectProductToEdit(object s, RoutedEventArgs e)
     {
         var productToEdit = (s as FrameworkElement).DataContext as Product;
-        EditWindow editWindow = new EditWindow(productToEdit);
+        EditWindow editWindow = new EditWindow(productToEdit, this.ProductCrontroller);
         editWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         editWindow.Show();
     }

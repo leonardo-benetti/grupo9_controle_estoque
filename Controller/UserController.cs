@@ -7,7 +7,7 @@ using grupo9_controle_estoque.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace grupo9_controle_estoque.Controller;
-internal class UserController
+public class UserController
 {
     private readonly ApplicationDbContext context;
     private DbSet<User> Users;

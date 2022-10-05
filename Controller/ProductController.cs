@@ -4,11 +4,11 @@ using System.Linq;
 using grupo9_controle_estoque.Model;
 using Microsoft.EntityFrameworkCore;
 namespace grupo9_controle_estoque.Controller;
-internal class ProductCrontroller
+public class ProductController
 {
     private readonly ApplicationDbContext context;
     private DbSet<Product> Products;
-    public ProductCrontroller(ApplicationDbContext context)
+    public ProductController(ApplicationDbContext context)
     {
         this.context = context;
         this.Products = this.context.Products;
@@ -29,7 +29,7 @@ internal class ProductCrontroller
         context.SaveChanges();
     }
     public void EditProduct(string id, Product newProductValues)
-    {
+    {   
         Product selectedProduct = Products.Where(product => product.GUID == id).Single();
         changeProductValues(ref selectedProduct, newProductValues);
         context.SaveChanges();
