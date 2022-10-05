@@ -102,7 +102,7 @@
 
             <UserControl Name="UserControlLoggedOff" Grid.Row="0" Margin="5" Visibility="Visible">
                 <StackPanel>
-                    <Label Content="Usuário não logado"  FontSize="15" HorizontalAlignment="Center"/>
+                    <Label Content="Usuário não logado" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center"/>
                     <Label Content="Forneça suas credenciais" FontSize="10" HorizontalAlignment="Left"/>
                     <Grid Name="LoginForm">
                         <Grid.RowDefinitions>
