@@ -125,6 +125,7 @@ public partial class MainWindow : Window
     {
         var productDescription = (s as FrameworkElement).DataContext as Product;
         Description windowDescription = new Description(productDescription);
+        windowDescription.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         windowDescription.Show();
     }
 
@@ -132,6 +133,7 @@ public partial class MainWindow : Window
     {
         var productToEdit = (s as FrameworkElement).DataContext as Product;
         EditWindow editWindow = new EditWindow(productToEdit);
+        editWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         editWindow.Show();
     }
 }
