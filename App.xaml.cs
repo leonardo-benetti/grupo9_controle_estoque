@@ -18,8 +18,7 @@ namespace grupo9_controle_estoque
         {
             ServiceCollection services = new();
 
-            char sep = Path.DirectorySeparatorChar;
-            string database_path = $"PersistentData{sep}DB{sep}Stock.db";
+            string database_path = Path.Combine(Path.GetFullPath(@"..\..\..\"), "PersistentData", "DB", "Stock.db");
 
             services.AddDbContext<ApplicationDbContext>(options =>
             {

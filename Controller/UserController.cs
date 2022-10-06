@@ -40,21 +40,21 @@ internal class UserController
         this.Users.Remove(userToDelete);
         context.SaveChanges();
     }
-    public bool Logon(string username, string password)
+    public User? Logon(string username, string password)
     {
         try
         {
             User? db_user = this.Users.Where(user => user.Name == username).FirstOrDefault();
             if (db_user == null)
-                return false;
+                return null;
             string attempt_password_hash = User.hashPassword(db_user.Pwd_salt, password);
             if (attempt_password_hash == db_user.Pwd_hash)
-                return true;
-            return false;
+                return db_user;
+            return null;
         }
         catch
         {
-            return false;
+            return null;
         }
     }
 }
