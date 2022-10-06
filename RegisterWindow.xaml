@@ -1,0 +1,44 @@
+﻿<Window x:Class="grupo9_controle_estoque.RegisterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:grupo9_controle_estoque"
+        mc:Ignorable="d"
+        Title="Cadastro" Height="450" Width="400"
+        ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="170"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0"  FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Arraste e solte uma foto de perfil no campo abaixo"/>
+        <Border Grid.Row="1" Background="LightGray" BorderBrush="Black"
+                    Width="380" Height="150" Margin="10">
+            <Image Name="RegisterWindowProfilePic"
+                       Width="380" Height="150"
+                       AllowDrop="True"
+                       Drop="ImgDrop"
+                       MouseLeftButtonDown="ImgClicked"
+                   />
+        </Border>
+
+        <Label Grid.Row="2" HorizontalAlignment="Center" FontSize="10" Content="Nome"/>
+        <TextBox Grid.Row="3" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="200" Height="30" FontSize="10" Text="{Binding Name}"/>
+
+        <Label Grid.Row="4"  HorizontalAlignment="Center" FontSize="10" Content="Senha"/>
+        <TextBox Grid.Row="5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="200" Height="30" FontSize="10" Text="{Binding Pwd}"/>
+
+        <Button Grid.Row="6" Height="30" Width="100" VerticalAlignment="Top"
+                Margin="0,20,0,20"
+                Content="Cadastrar"
+                Click="RegisterUser"/>
+
+    </Grid>
+</Window>
