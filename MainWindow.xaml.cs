@@ -1,12 +1,10 @@
 ﻿using grupo9_controle_estoque.Model;
 using grupo9_controle_estoque.Controller;
-
 using System.Windows;
 using System.Windows.Media.Imaging;
 using System;
 using System.IO;
 using System.Collections.Generic;
-using grupo9_controle_estoque;
 
 namespace grupo9_controle_estoque;
 /// <summary>
@@ -16,7 +14,7 @@ public partial class MainWindow : Window
 {
     private readonly ApplicationDbContext context;
     private readonly UserController UserController;
-    private readonly ProductCrontroller ProductCrontroller;
+    private readonly ProductController ProductCrontroller;
 
     private readonly string CurrentDir = Path.GetFullPath(@"..\..\..\");
 
