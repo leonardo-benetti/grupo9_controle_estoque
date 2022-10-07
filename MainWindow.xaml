@@ -232,7 +232,8 @@
 
                 </StackPanel>
             </Border>
-            <Button Grid.Row="2"
+            <UserControl Name="UserControlExportButton" Grid.Row="2" Visibility="Collapsed">
+                <Button 
                    Name="MainWindowHelpButton"
                    Content="Exportar"
                    FontSize="10"
@@ -241,6 +242,7 @@
                    HorizontalAlignment="Left"
                    Margin="5"
                    Click="ExportExcel"/>
+            </UserControl>
 
             <Button Grid.Row="2"
                    Name="ExportButton"
