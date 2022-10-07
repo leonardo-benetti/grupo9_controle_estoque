@@ -18,21 +18,34 @@
 
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"/> <!-- title -->
-                <RowDefinition/> <!-- data -->
-                <RowDefinition Height="30"/> <!-- data footer-->
+                <RowDefinition Height="50"/>
+                <!-- title -->
+                <RowDefinition Height="30"/>
+                <!-- SearchBox -->
+                <RowDefinition/>
+                <!-- data -->
+                <RowDefinition Height="30"/>
+                <!-- data footer-->
             </Grid.RowDefinitions>
-
-            <Label FontSize="18" 
+            
+            <Label FontSize="20" 
                 FontWeight="Bold"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 Margin="5"
                 Grid.Row="0"
                 Content="Produtos em estoque"/>
-
-
-            <StackPanel Grid.Row="1" Margin="5">
+            <Grid Grid.Row="1" Name="SearchBoxGrid">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBox Name="SearchBox" Grid.Column="0" Margin="10,5" Width="100" 
+                     HorizontalAlignment="Left" VerticalAlignment="Center" Height="20"
+                     Text="{Binding Text}"/>
+                <Button Grid.Column="1" Content="Filter" Click="GetFilteredProducts" Width="50" Margin="10,5" HorizontalAlignment="Left"/>
+            </Grid>
+            <StackPanel Grid.Row="2" Margin="5">
                 <DataGrid x:Name="ProductDataGrid" AutoGenerateColumns="False" IsReadOnly="True"
                               ColumnWidth="*" Margin="5" IsSynchronizedWithCurrentItem="True">
                     <DataGrid.Columns>
@@ -69,7 +82,7 @@
                 </DataGrid>
             </StackPanel>
 
-            <Label Grid.Row="2"
+            <Label Grid.Row="3"
                    FontSize="10" Content="Data Footer"
                    HorizontalAlignment="Left" VerticalAlignment="Center"/>
         </Grid>

@@ -1,8 +1,9 @@
 ﻿using grupo9_controle_estoque.Model;
 using grupo9_controle_estoque.Controller;
 using grupo9_controle_estoque;
-using System.Linq;
+using System.Collections.Generic;
 using System.Windows;
+using System;
 
 namespace grupo9_controle_estoque;
 /// <summary>
@@ -12,8 +13,11 @@ public partial class MainWindow : Window
 {
     private readonly ApplicationDbContext context;
     private readonly UserController UserController;
-    private readonly ProductCrontroller ProductCrontroller;
-
+    private readonly ProductController ProductCrontroller;
+    private class SearchText
+    {
+        public string Text { get; set; } = "Filtro";
+    }
     private bool isLogedIn = false;
 
     private class LoginAttempt
@@ -23,34 +27,33 @@ public partial class MainWindow : Window
     }
 
     private LoginAttempt loginAttempt = new();
-
+    private SearchText searchText = new();
     Product NewProduct = new();
     Product selectedProduct = new();
     public MainWindow(ApplicationDbContext context)
     {
         this.context = context;
         this.UserController = new UserController(context);
-        this.ProductCrontroller = new ProductCrontroller(context);
+        this.ProductCrontroller = new ProductController(context);
         InitializeComponent();
         GetProducts();
         AddItemGrid.DataContext = NewProduct;
         LoginForm.DataContext = loginAttempt;
         MainWindowUserName.Text = loginAttempt.Name;
+        SearchBoxGrid.DataContext = searchText;
+        SearchBox.Text = searchText.Text;
     }
-    private Product fakeNewProduct()
+    private void GetFilteredProducts(object s, RoutedEventArgs e)
     {
-        return new Product()
+        if(this.searchText.Text != "")
         {
-            Name = "TESTE",
-            Description = "123",
-            Price = 1000,
-            Quantity = 10
-        };
+            ProductDataGrid.ItemsSource = this.ProductCrontroller.GetProducts().FindAll(product => product.Name.Contains(this.searchText.Text, StringComparison.OrdinalIgnoreCase)).ToArray();
+        }
+        else
+        {
+            GetProducts();
+        }
 
-    }
-    private User fakeNewUser()
-    {
-        return new User("TESTE_USER", "123");
     }
     private void GetProducts()
     {
@@ -59,7 +62,6 @@ public partial class MainWindow : Window
 
     private void EditProduct(object s, RoutedEventArgs e)
     {
-        NewProduct = fakeNewProduct();
         selectedProduct = (s as FrameworkElement).DataContext as Product;
         this.ProductCrontroller.EditProduct(selectedProduct.GUID, NewProduct);
         NewProduct = new Product();
@@ -132,7 +134,7 @@ public partial class MainWindow : Window
     private void SelectProductToEdit(object s, RoutedEventArgs e)
     {
         var productToEdit = (s as FrameworkElement).DataContext as Product;
-        EditWindow editWindow = new EditWindow(productToEdit);
+        EditWindow editWindow = new EditWindow(productToEdit, this.ProductCrontroller);
         editWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         editWindow.Show();
     }

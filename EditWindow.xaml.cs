@@ -13,10 +13,12 @@ public partial class EditWindow : Window
 {
     private Product product;
     private Product newProduct;
+    private ProductController productController;
     private List<Product> productList;
-    public EditWindow(Product product)
+    public EditWindow(Product product, ProductController productController)
     {
         this.product = product;
+        this.productController = productController;
         this.newProduct = new Product() {
             GUID = product.GUID,
             Category = product.Category,
@@ -27,12 +29,13 @@ public partial class EditWindow : Window
         };
         InitializeComponent();
         this.productList = new List<Product>();
-        this.productList.Add(product);
+        this.productList.Add(newProduct);
         ProductEditGrid.ItemsSource = this.productList;
     }
 
     private void SaveChanges(object s, RoutedEventArgs e)
     {
+        this.productController.EditProduct(this.product.GUID, this.newProduct);
         this.Close();
     }
 
