@@ -155,6 +155,11 @@ public partial class MainWindow : Window
             
             return;
         }
+        string messageBoxText = "Credenciais inválidas";
+        string caption = "Error";
+        MessageBoxButton button = MessageBoxButton.OK;
+        MessageBoxImage icon = MessageBoxImage.Warning;
+        MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
         loginAttempt = new();
         LoginForm.DataContext = loginAttempt;
     }
