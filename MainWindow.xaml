@@ -97,58 +97,58 @@
                 <!-- user footer-->
             </Grid.RowDefinitions>
 
-            <UserControl Name="UserControlLoggedIn" Grid.Row="0" Visibility="Collapsed">
-                <StackPanel>
-                    <!--https://www.c-sharpcorner.com/UploadFile/mahesh/using-xaml-image-in-wpf/-->
-                    <Image Name="MainWindowProfilePic"
-                           Height="80" Width="80"
-                           Margin="5,10,5,5"/>
-                
-                    <Border Margin="10,5,10,5" BorderThickness="1" BorderBrush="Black">
-                        <TextBlock Name="MainWindowUserName" Padding="0,5,0,5" HorizontalAlignment="Center" Text="{Binding Name}"/>
-                    </Border>
+            <StackPanel Grid.Row="0">
+                <Image Name="MainWindowProfilePic"
+                       Height="80" Width="80"
+                       Margin="5,10,5,5"
+                       />
+                <Border Margin="10,5,10,5" BorderThickness="1" BorderBrush="Black">
+                    <TextBlock Name="MainWindowUserName" Padding="0,5,0,5" HorizontalAlignment="Center" Text="{Binding Name}"/>
+                </Border>
 
-                    <Button Content="Logout" Width="50" Margin="0,5,0,5" Click="Logout"/>
+                <UserControl Name="UserControlLoggedIn" Grid.Row="0" Visibility="Collapsed">
+                    <StackPanel>
+                        <Button Content="Logout" Width="50" Margin="0,5,0,5" Click="Logout"/>
+                    </StackPanel>
+                </UserControl>
 
-                </StackPanel>
-            </UserControl>
 
-            <UserControl Name="UserControlLoggedOff" Grid.Row="0" Margin="5" Visibility="Visible">
-                <StackPanel>
-                    <Label Content="Usuário não logado" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center"/>
-                    <Label Content="Forneça suas credenciais" FontSize="10" HorizontalAlignment="Left"/>
-                    <Grid Name="LoginForm">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
+                <UserControl Name="UserControlLoggedOff" Grid.Row="0" Margin="5" Visibility="Visible">
+                    <StackPanel>
+                        <Label Content="Forneça suas credenciais" FontSize="10" HorizontalAlignment="Left"/>
+                        <Grid Name="LoginForm">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
 
-                        <Label Grid.Row="0" FontSize="10" Grid.Column="0" Content="username"/>
-                        <TextBox Grid.Row="0" FontSize="10" Grid.Column="1" VerticalContentAlignment="Center" Text="{Binding Name}"/>
+                            <Label Grid.Row="0" FontSize="10" Grid.Column="0" Content="username"/>
+                            <TextBox Grid.Row="0" FontSize="10" Grid.Column="1" VerticalContentAlignment="Center" Text="{Binding Name}"/>
 
-                        <Label Grid.Row="1" FontSize="10" Grid.Column="0" Content="senha"/>
-                        <TextBox Grid.Row="1" FontSize="10" Grid.Column="1" VerticalContentAlignment="Center" Text="{Binding Pwd}"/>
+                            <Label Grid.Row="1" FontSize="10" Grid.Column="0" Content="senha"/>
+                            <TextBox Grid.Row="1" FontSize="10" Grid.Column="1" VerticalContentAlignment="Center" Text="{Binding Pwd}"/>
 
-                        <Button Grid.Row="2" FontSize="10" Grid.ColumnSpan="2" VerticalContentAlignment="Center" Width="80" Content="login"
+                            <Button Grid.Row="2" FontSize="10" Grid.ColumnSpan="2" VerticalContentAlignment="Center" Width="80" Content="login"
                                 Margin="10"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 Click="TryLogin"/>
-                    </Grid>
-                    <Label Content="Não possui cadastro?" FontSize="10" HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
-                    <Button FontSize="10" Grid.Column="1"  Width="80" Content="Cadastre-se"
+                        </Grid>
+                        <Label Content="Não possui cadastro?" FontSize="10" HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
+                        <Button FontSize="10" Grid.Column="1"  Width="80" Content="Cadastre-se"
                                 Margin="10"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 VerticalContentAlignment="Center"
                                 Click="AddUser"/>
-                </StackPanel>
-            </UserControl>
+                    </StackPanel>
+                </UserControl>
+            </StackPanel>
 
             <Border Grid.Row="1" Margin="5" BorderThickness="1" BorderBrush="Black">
                 <StackPanel Margin="5" VerticalAlignment="Bottom">

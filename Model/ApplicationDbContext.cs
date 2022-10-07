@@ -8,9 +8,8 @@ public class ApplicationDbContext : DbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
-        char sep = Path.DirectorySeparatorChar;
-        CreatePath($"PersistentData{sep}DB");
-        CreatePath($"PersistentData{sep}ProfilePictures");
+        CreatePath(Path.Combine(Path.GetFullPath(@"..\..\..\"), "PersistentData", "DB"));
+        CreatePath(Path.Combine(Path.GetFullPath(@"..\..\..\"), "PersistentData", "ProfilePictures"));
         Database.EnsureCreated();
     }
 

@@ -1,9 +1,10 @@
 ﻿using grupo9_controle_estoque.Model;
 using grupo9_controle_estoque.Controller;
-using grupo9_controle_estoque;
-using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Media.Imaging;
 using System;
+using System.IO;
+using System.Collections.Generic;
 
 namespace grupo9_controle_estoque;
 /// <summary>
@@ -14,10 +15,14 @@ public partial class MainWindow : Window
     private readonly ApplicationDbContext context;
     private readonly UserController UserController;
     private readonly ProductController ProductCrontroller;
+
+    private readonly string CurrentDir = Path.GetFullPath(@"..\..\..\");
+
     private class SearchText
     {
         public string Text { get; set; } = "Filtro";
     }
+ 
     private bool isLogedIn = false;
 
     private class LoginAttempt
@@ -27,7 +32,11 @@ public partial class MainWindow : Window
     }
 
     private LoginAttempt loginAttempt = new();
+
+    User LoggedUser = new();
+
     private SearchText searchText = new();
+
     Product NewProduct = new();
     Product selectedProduct = new();
     public MainWindow(ApplicationDbContext context)
@@ -39,11 +48,35 @@ public partial class MainWindow : Window
         GetProducts();
         AddItemGrid.DataContext = NewProduct;
         LoginForm.DataContext = loginAttempt;
-        MainWindowUserName.Text = loginAttempt.Name;
+
+        MainWindowUserName.Text = LoggedUser.Name;
         SearchBoxGrid.DataContext = searchText;
         SearchBox.Text = searchText.Text;
+
+        loadUserImage();
     }
+
+    private void loadUserImage()
+    {
+        // Create a BitmapSource
+        BitmapImage bitmap = new BitmapImage();
+        bitmap.BeginInit();
+
+        if (LoggedUser.Profile_pic == string.Empty)
+        {
+            bitmap.UriSource = new Uri(Path.Combine(CurrentDir, "PersistentData", "ProfilePictures", "unknown_user.jpg"), UriKind.Absolute);
+        }
+        else
+        {
+            bitmap.UriSource = new Uri(Path.Combine(CurrentDir, "PersistentData", "ProfilePictures", LoggedUser.Profile_pic), UriKind.Absolute);
+        }
+        bitmap.EndInit();
+        // Add Image to Window
+        MainWindowProfilePic.Source = bitmap;
+    }
+        
     private void GetFilteredProducts(object s, RoutedEventArgs e)
+
     {
         if(this.searchText.Text != "")
         {
@@ -87,27 +120,39 @@ public partial class MainWindow : Window
     }
     private void AddUser(object s, RoutedEventArgs e)
     {
-        bool success = this.UserController.CreateUser(loginAttempt.Name, loginAttempt.Pwd);
-        if (success)
-        {
-            this.isLogedIn = true;
-            UserControlLoggedOff.Visibility = Visibility.Collapsed;
-            UserControlLoggedIn.Visibility = Visibility.Visible;
-            return;
-        }
-        loginAttempt = new();
-        LoginForm.DataContext = loginAttempt;
+        //bool success = this.UserController.CreateUser(loginAttempt.Name, loginAttempt.Pwd);
+        //if (success)
+        //{
+        //    this.isLogedIn = true;
+        //    UserControlLoggedOff.Visibility = Visibility.Collapsed;
+        //    UserControlLoggedIn.Visibility = Visibility.Visible;
+        //    return;
+        //}
+        //loginAttempt = new();
+        //LoginForm.DataContext = loginAttempt;
+
+        RegisterWindow registerWindow = new RegisterWindow();
+        registerWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+        registerWindow.Show();
     }
 
     private void TryLogin(object sender, RoutedEventArgs e)
     {
-        bool success = this.UserController.Logon(loginAttempt.Name, loginAttempt.Pwd);
-        if (success)
+        User? result = this.UserController.Logon(loginAttempt.Name, loginAttempt.Pwd);
+        if (result != null)
         {
             this.isLogedIn = true;
+
+
             UserControlLoggedOff.Visibility = Visibility.Collapsed;
             UserControlLoggedIn.Visibility = Visibility.Visible;
-            MainWindowUserName.Text = loginAttempt.Name;
+
+
+            LoggedUser = result;
+            loadUserImage();
+
+            MainWindowUserName.Text = LoggedUser.Name;
+            
             return;
         }
         loginAttempt = new();
@@ -117,9 +162,13 @@ public partial class MainWindow : Window
     private void Logout(object sender, RoutedEventArgs e)
     {
         loginAttempt = new();
+        LoggedUser = new();
         LoginForm.DataContext = loginAttempt;
-        MainWindowUserName.Text = loginAttempt.Name;
+        MainWindowUserName.Text = LoggedUser.Name;
         this.isLogedIn = false;
+
+        loadUserImage();
+
         UserControlLoggedIn.Visibility = Visibility.Collapsed;
         UserControlLoggedOff.Visibility = Visibility.Visible;
     }
