@@ -48,7 +48,6 @@ public partial class MainWindow : Window
         GetProducts();
         AddItemGrid.DataContext = NewProduct;
         LoginForm.DataContext = loginAttempt;
-
         MainWindowUserName.Text = LoggedUser.Name;
         SearchBoxGrid.DataContext = searchText;
         SearchBox.Text = searchText.Text;
@@ -90,6 +89,7 @@ public partial class MainWindow : Window
     }
     private void GetProducts()
     {
+        ProductDataGridOff.ItemsSource = new List<Product>();
         ProductDataGrid.ItemsSource = this.ProductCrontroller.GetProducts();
     }
 
@@ -143,9 +143,7 @@ public partial class MainWindow : Window
         {
             this.isLogedIn = true;
 
-
-            UserControlLoggedOff.Visibility = Visibility.Collapsed;
-            UserControlLoggedIn.Visibility = Visibility.Visible;
+            LoginVisibility(true);
 
 
             LoggedUser = result;
@@ -164,6 +162,13 @@ public partial class MainWindow : Window
         LoginForm.DataContext = loginAttempt;
     }
 
+    private void LoginVisibility(bool logged)
+    {
+        UserControlProductsIn.Visibility = logged ? Visibility.Visible : Visibility.Collapsed;
+        UserControlProductsOff.Visibility = !logged ? Visibility.Visible : Visibility.Collapsed;
+        UserControlLoggedIn.Visibility = logged ? Visibility.Visible : Visibility.Collapsed;
+        UserControlLoggedOff.Visibility = !logged ? Visibility.Visible : Visibility.Collapsed;
+    }
     private void Logout(object sender, RoutedEventArgs e)
     {
         loginAttempt = new();
@@ -174,8 +179,7 @@ public partial class MainWindow : Window
 
         loadUserImage();
 
-        UserControlLoggedIn.Visibility = Visibility.Collapsed;
-        UserControlLoggedOff.Visibility = Visibility.Visible;
+        LoginVisibility(false);
     }
     private void SelectProductToSeeDescription(object s, RoutedEventArgs e)
     {
