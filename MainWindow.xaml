@@ -232,15 +232,24 @@
 
                 </StackPanel>
             </Border>
-
             <Button Grid.Row="2"
                    Name="MainWindowHelpButton"
+                   Content="Exportar"
+                   FontSize="10"
+                   VerticalContentAlignment="Center"
+                   HorizontalContentAlignment="Center"
+                   HorizontalAlignment="Left"
+                   Margin="5"
+                   Click="ExportExcel"/>
+
+            <Button Grid.Row="2"
+                   Name="ExportButton"
                    Content="Ajuda"
                    FontSize="10"
                    VerticalContentAlignment="Center"
                    HorizontalContentAlignment="Center"
                    HorizontalAlignment="Right"
-                   Margin="0,0,5,5"/>
+                   Margin="5"/>
 
         </Grid>
     </Grid>

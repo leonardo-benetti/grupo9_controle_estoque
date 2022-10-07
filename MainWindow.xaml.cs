@@ -5,6 +5,7 @@ using System.Windows.Media.Imaging;
 using System;
 using System.IO;
 using System.Collections.Generic;
+using ClosedXML.Excel;
 
 namespace grupo9_controle_estoque;
 /// <summary>
@@ -195,6 +196,34 @@ public partial class MainWindow : Window
         EditWindow editWindow = new EditWindow(productToEdit, this.ProductCrontroller);
         editWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         editWindow.Show();
+    }
+
+    private void ExportExcel(object s, RoutedEventArgs e)
+    {
+        try
+        {
+            List<Product> dataList = this.ProductCrontroller.GetProducts();
+            var workbook = new XLWorkbook();     //creates the workbook
+            var wsDetailedData = workbook.AddWorksheet("Stock"); //creates the worksheet with sheetname
+            wsDetailedData.Cell(1, 1).InsertTable(dataList); //inserts the data to cell A1 
+            var path = Path.Combine(CurrentDir, "PersistentData", "data.xlsx");
+            workbook.SaveAs(path); //saves the workbook
+            string messageBoxText = "Dados Exportados com sucesso";
+            string caption = "Sucesso";
+            MessageBoxButton button = MessageBoxButton.OK;
+            MessageBoxImage icon = MessageBoxImage.None;
+            MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+        }
+        catch (Exception)
+        {
+            string messageBoxText = "Não foi possível salvar os dados";
+            string caption = "Error";
+            MessageBoxButton button = MessageBoxButton.OK;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+        }
+
+
     }
 }
 
