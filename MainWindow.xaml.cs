@@ -5,6 +5,7 @@ using System.Windows.Media.Imaging;
 using System;
 using System.IO;
 using System.Collections.Generic;
+using ClosedXML.Excel;
 
 namespace grupo9_controle_estoque;
 /// <summary>
@@ -48,7 +49,6 @@ public partial class MainWindow : Window
         GetProducts();
         AddItemGrid.DataContext = NewProduct;
         LoginForm.DataContext = loginAttempt;
-
         MainWindowUserName.Text = LoggedUser.Name;
         SearchBoxGrid.DataContext = searchText;
         SearchBox.Text = searchText.Text;
@@ -90,6 +90,7 @@ public partial class MainWindow : Window
     }
     private void GetProducts()
     {
+        ProductDataGridOff.ItemsSource = new List<Product>();
         ProductDataGrid.ItemsSource = this.ProductCrontroller.GetProducts();
     }
 
@@ -143,9 +144,7 @@ public partial class MainWindow : Window
         {
             this.isLogedIn = true;
 
-
-            UserControlLoggedOff.Visibility = Visibility.Collapsed;
-            UserControlLoggedIn.Visibility = Visibility.Visible;
+            LoginVisibility(true);
 
 
             LoggedUser = result;
@@ -155,10 +154,24 @@ public partial class MainWindow : Window
             
             return;
         }
+        string messageBoxText = "Credenciais inválidas";
+        string caption = "Error";
+        MessageBoxButton button = MessageBoxButton.OK;
+        MessageBoxImage icon = MessageBoxImage.Warning;
+        MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
         loginAttempt = new();
         LoginForm.DataContext = loginAttempt;
     }
 
+    private void LoginVisibility(bool logged)
+    {
+        UserControlProductsIn.Visibility = logged ? Visibility.Visible : Visibility.Collapsed;
+        UserControlProductsOff.Visibility = !logged ? Visibility.Visible : Visibility.Collapsed;
+        UserControlLoggedIn.Visibility = logged ? Visibility.Visible : Visibility.Collapsed;
+        UserControlLoggedOff.Visibility = !logged ? Visibility.Visible : Visibility.Collapsed;
+        UserControlExportButton.Visibility = logged ? Visibility.Visible : Visibility.Collapsed;
+
+    }
     private void Logout(object sender, RoutedEventArgs e)
     {
         loginAttempt = new();
@@ -169,8 +182,7 @@ public partial class MainWindow : Window
 
         loadUserImage();
 
-        UserControlLoggedIn.Visibility = Visibility.Collapsed;
-        UserControlLoggedOff.Visibility = Visibility.Visible;
+        LoginVisibility(false);
     }
     private void SelectProductToSeeDescription(object s, RoutedEventArgs e)
     {
@@ -186,6 +198,34 @@ public partial class MainWindow : Window
         EditWindow editWindow = new EditWindow(productToEdit, this.ProductCrontroller);
         editWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         editWindow.Show();
+    }
+
+    private void ExportExcel(object s, RoutedEventArgs e)
+    {
+        try
+        {
+            List<Product> dataList = this.ProductCrontroller.GetProducts();
+            var workbook = new XLWorkbook();     //creates the workbook
+            var wsDetailedData = workbook.AddWorksheet("Stock"); //creates the worksheet with sheetname
+            wsDetailedData.Cell(1, 1).InsertTable(dataList); //inserts the data to cell A1 
+            var path = Path.Combine(CurrentDir, "PersistentData", "data.xlsx");
+            workbook.SaveAs(path); //saves the workbook
+            string messageBoxText = "Dados Exportados com sucesso";
+            string caption = "Sucesso";
+            MessageBoxButton button = MessageBoxButton.OK;
+            MessageBoxImage icon = MessageBoxImage.None;
+            MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+        }
+        catch (Exception)
+        {
+            string messageBoxText = "Não foi possível salvar os dados";
+            string caption = "Error";
+            MessageBoxButton button = MessageBoxButton.OK;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+        }
+
+
     }
 }
 
