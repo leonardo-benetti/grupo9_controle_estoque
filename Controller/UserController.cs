@@ -21,11 +21,11 @@ public class UserController
         return this.context.Users.ToList();
     }
 
-    public bool CreateUser(string user_name, string password)
+    public bool CreateUser(string user_name, string password, string picture_path="")
     {
         try
         {
-            User newUser = new User(user_name, password);
+            User newUser = new User(user_name, password, picture_path);
             this.Users.Add(newUser);
             this.context.SaveChanges();
             return true;
