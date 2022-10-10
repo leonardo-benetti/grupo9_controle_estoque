@@ -4,6 +4,8 @@
              xmlns:local="clr-namespace:grupo9_controle_estoque"
              Startup="OnStartup">
     <Application.Resources>
-         
+        <Style x:Key="FilterBox" TargetType="TextBox">
+            <Setter Property="Foreground" Value="Gray"/>
+        </Style>
     </Application.Resources>
 </Application>

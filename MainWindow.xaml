@@ -42,7 +42,7 @@
                 </Grid.ColumnDefinitions>
                 <TextBox Name="SearchBox" Grid.Column="0" Margin="10,5" Width="100" 
                      HorizontalAlignment="Left" VerticalAlignment="Center" Height="20"
-                     Text="{Binding Text}"/>
+                     Style="{StaticResource FilterBox}" Text="{Binding Text}"/>
                 <Button Grid.Column="1" Content="Filter" Click="GetFilteredProducts" Width="50" Margin="10,5" HorizontalAlignment="Left"/>
             </Grid>
             <UserControl Name="UserControlProductsIn" Grid.Row="2" Margin="0" Visibility="Collapsed">
