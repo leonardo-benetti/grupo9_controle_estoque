@@ -5,6 +5,7 @@ using System.Windows.Media.Imaging;
 using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Threading;
 using ClosedXML.Excel;
 
 namespace grupo9_controle_estoque;
@@ -186,7 +187,8 @@ public partial class MainWindow : Window
         var productToEdit = (s as FrameworkElement).DataContext as Product;
         EditWindow editWindow = new EditWindow(productToEdit, this.ProductCrontroller);
         editWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-        editWindow.Show();
+        editWindow.ShowDialog();
+        GetProducts();
     }
 
     private void ExportExcel(object s, RoutedEventArgs e)
