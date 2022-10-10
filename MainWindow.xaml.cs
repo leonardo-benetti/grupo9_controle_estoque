@@ -159,6 +159,7 @@ public partial class MainWindow : Window
         UserControlLoggedIn.Visibility = logged ? Visibility.Visible : Visibility.Collapsed;
         UserControlLoggedOff.Visibility = !logged ? Visibility.Visible : Visibility.Collapsed;
         UserControlExportButton.Visibility = logged ? Visibility.Visible : Visibility.Collapsed;
+        UserControlInsertProduct.Visibility = logged ? Visibility.Visible : Visibility.Collapsed;
 
     }
     private void Logout(object sender, RoutedEventArgs e)

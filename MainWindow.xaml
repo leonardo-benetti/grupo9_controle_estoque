@@ -189,49 +189,52 @@
                 </UserControl>
             </StackPanel>
 
-            <Border Grid.Row="1" Margin="5" BorderThickness="1" BorderBrush="Black">
-                <StackPanel Margin="5" VerticalAlignment="Bottom">
-                    <Label Content="Inserir Produto" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center"/>
-                    <Grid Name="AddItemGrid">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
+            <UserControl Name="UserControlInsertProduct" Grid.Row="1" Visibility="Collapsed">
+                <Border Margin="5" BorderThickness="1" BorderBrush="Black">
+                    <StackPanel Margin="5" VerticalAlignment="Bottom">
+                        <Label Content="Inserir Produto" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center"/>
+                        <Grid Name="AddItemGrid">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
 
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
 
-                        <Label Grid.Row="0" FontSize="10" Grid.Column="0" Content="Nome"/>
-                        <TextBox Grid.Row="0" FontSize="10" Grid.Column="1" Text="{Binding Name}"/>
+                            <Label Grid.Row="0" FontSize="10" Grid.Column="0" Content="Nome"/>
+                            <TextBox Grid.Row="0" FontSize="10" Grid.Column="1" Text="{Binding Name}"/>
 
-                        <Label Grid.Row="1" FontSize="10" Grid.Column="0" Content="Descrição"/>
-                        <TextBox Grid.Row="1" FontSize="10" Grid.Column="1" Text="{Binding Description}"/>
+                            <Label Grid.Row="1" FontSize="10" Grid.Column="0" Content="Descrição"/>
+                            <TextBox Grid.Row="1" FontSize="10" Grid.Column="1" Text="{Binding Description}"/>
 
-                        <Label Grid.Row="2" FontSize="10" Grid.Column="0" Content="Preço"/>
-                        <TextBox Grid.Row="2" FontSize="10" Grid.Column="1" Text="{Binding Price}"/>
+                            <Label Grid.Row="2" FontSize="10" Grid.Column="0" Content="Preço"/>
+                            <TextBox Grid.Row="2" FontSize="10" Grid.Column="1" Text="{Binding Price}"/>
 
-                        <Label Grid.Row="3" FontSize="10" Grid.Column="0" Content="Quantidade"/>
-                        <TextBox Grid.Row="3" FontSize="10" Grid.Column="1" Text="{Binding Quantity}"/>
+                            <Label Grid.Row="3" FontSize="10" Grid.Column="0" Content="Quantidade"/>
+                            <TextBox Grid.Row="3" FontSize="10" Grid.Column="1" Text="{Binding Quantity}"/>
 
-                        <Label Grid.Row="4" FontSize="10" Grid.Column="0" Content="Categoria"/>
-                        <TextBox Grid.Row="4" FontSize="10" Grid.Column="1" Text="{Binding Category}"/>
+                            <Label Grid.Row="4" FontSize="10" Grid.Column="0" Content="Categoria"/>
+                            <TextBox Grid.Row="4" FontSize="10" Grid.Column="1" Text="{Binding Category}"/>
 
-                        <Button Grid.Row="5" FontSize="10" Grid.ColumnSpan="2" Width="80" Content="Adicionar"
+                            <Button Grid.Row="5" FontSize="10" Grid.ColumnSpan="2" Width="80" Content="Adicionar"
                                 Margin="10"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 Click="AddItem"/>
 
-                    </Grid>
+                        </Grid>
 
-                </StackPanel>
-            </Border>
+                    </StackPanel>
+                </Border>
+            </UserControl>
+
             <UserControl Name="UserControlExportButton" Grid.Row="2" Visibility="Collapsed">
                 <Button 
                    Name="MainWindowHelpButton"
