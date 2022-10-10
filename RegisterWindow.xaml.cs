@@ -79,6 +79,7 @@ public partial class RegisterWindow : Window
             loadImage();
             UserInput = new();
             AddUserGrid.DataContext = UserInput;
+            this.Close();
         }
         else
         {
