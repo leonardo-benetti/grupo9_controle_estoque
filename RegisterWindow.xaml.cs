@@ -84,6 +84,7 @@ public partial class RegisterWindow : Window
         {
             MessageBox.Show("Falha no cadastro", "falha", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.Yes);
         }
+        this.Close();
     }
 
 }
