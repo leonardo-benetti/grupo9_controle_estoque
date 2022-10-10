@@ -29,12 +29,12 @@ public class User
     {
         Name = "Usuário não logado";
     }
-    public User(string Name, string Password)
+    public User(string Name, string Password, string ProfilePicPath="")
     {
         this.Name = Name;
         this.Pwd_salt = generateSalt();
         this.Pwd_hash = hashPassword(this.Pwd_salt, Password);
-        this.Profile_pic = string.Empty;
+        this.Profile_pic = ProfilePicPath;
     }
     public static string generateSalt()
     {

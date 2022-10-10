@@ -121,18 +121,7 @@ public partial class MainWindow : Window
     }
     private void AddUser(object s, RoutedEventArgs e)
     {
-        //bool success = this.UserController.CreateUser(loginAttempt.Name, loginAttempt.Pwd);
-        //if (success)
-        //{
-        //    this.isLogedIn = true;
-        //    UserControlLoggedOff.Visibility = Visibility.Collapsed;
-        //    UserControlLoggedIn.Visibility = Visibility.Visible;
-        //    return;
-        //}
-        //loginAttempt = new();
-        //LoginForm.DataContext = loginAttempt;
-
-        RegisterWindow registerWindow = new RegisterWindow();
+        RegisterWindow registerWindow = new RegisterWindow(this.UserController);
         registerWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         registerWindow.Show();
     }
