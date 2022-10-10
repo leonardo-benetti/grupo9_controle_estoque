@@ -79,12 +79,12 @@ public partial class RegisterWindow : Window
             loadImage();
             UserInput = new();
             AddUserGrid.DataContext = UserInput;
-            this.Close();
         }
         else
         {
             MessageBox.Show("Falha no cadastro", "falha", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.Yes);
         }
+        this.Close();
     }
 
 }
