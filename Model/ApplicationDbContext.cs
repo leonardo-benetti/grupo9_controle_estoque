@@ -23,6 +23,7 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<User> Users { get; set; }
     public DbSet<Product> Products { get; set; }
+    public DbSet<Notification> Notification { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -40,16 +41,27 @@ public class ApplicationDbContext : DbContext
             Profile_pic = ""
         });
 
+        string productGUID = Guid.NewGuid().ToString();
         modelBuilder.Entity<Product>().HasData(
         new Product
         {
-            GUID = Guid.NewGuid().ToString(),
+            GUID = productGUID,
             Name = "Livro",
             Description = "O retorno do rei",
             Price = 50,
             Quantity = 5,
             Category = "Fantasia"
-        }); ;
+        });
+
+        modelBuilder.Entity<Notification>().HasData(
+        new Notification
+        {
+            UserID = 1,
+            ProductID = productGUID,
+            MinQuantity = 5,
+        });
+
+        modelBuilder.Entity<Notification>().HasKey(notification => new { notification.UserID, notification.ProductID });
 
         base.OnModelCreating(modelBuilder);
     }
