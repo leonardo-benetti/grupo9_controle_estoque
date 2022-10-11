@@ -200,9 +200,9 @@ public partial class MainWindow : Window
     }  
     private void ShowNotifications(object s, RoutedEventArgs e)
     {
-        //EditWindow notifications = new EditWindow(this.LoggedUser);
-        //notifications.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-        //notifications.ShowDialog();
+        NotificationWindow notifications = new NotificationWindow(this.LoggedUser);
+        notifications.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+        notifications.ShowDialog();
         GetProducts();
     }
 
