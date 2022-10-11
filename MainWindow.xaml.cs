@@ -62,6 +62,8 @@ public partial class MainWindow : Window
         // Create a BitmapSource
         BitmapImage bitmap = new BitmapImage();
         bitmap.BeginInit();
+        BitmapImage bitmapNotify = new BitmapImage();
+        bitmapNotify.BeginInit();
 
         if (LoggedUser.Profile_pic == string.Empty)
         {
@@ -74,6 +76,10 @@ public partial class MainWindow : Window
         bitmap.EndInit();
         // Add Image to Window
         MainWindowProfilePic.Source = bitmap;
+
+        bitmapNotify.UriSource = new Uri(Path.Combine(CurrentDir, "PersistentData", "Icons", "notifyIcon.jpg"), UriKind.Absolute);
+        bitmapNotify.EndInit();
+        NotifyImage.Source = bitmapNotify;
     }
         
     private void GetFilteredProducts(object s, RoutedEventArgs e)
@@ -161,6 +167,7 @@ public partial class MainWindow : Window
         UserControlLoggedOff.Visibility = !logged ? Visibility.Visible : Visibility.Collapsed;
         UserControlExportButton.Visibility = logged ? Visibility.Visible : Visibility.Collapsed;
         UserControlInsertProduct.Visibility = logged ? Visibility.Visible : Visibility.Collapsed;
+        UserControlNotification.Visibility = logged ? Visibility.Visible : Visibility.Collapsed;
 
     }
     private void Logout(object sender, RoutedEventArgs e)
@@ -189,6 +196,13 @@ public partial class MainWindow : Window
         EditWindow editWindow = new EditWindow(productToEdit, this.ProductCrontroller);
         editWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         editWindow.ShowDialog();
+        GetProducts();
+    }  
+    private void ShowNotifications(object s, RoutedEventArgs e)
+    {
+        //EditWindow notifications = new EditWindow(this.LoggedUser);
+        //notifications.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+        //notifications.ShowDialog();
         GetProducts();
     }
 
