@@ -7,6 +7,8 @@ using System.IO;
 using System.Collections.Generic;
 using System.Threading;
 using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Wordprocessing;
+using System.Drawing;
 
 namespace grupo9_controle_estoque;
 /// <summary>
@@ -33,7 +35,15 @@ public partial class MainWindow : Window
         public string Pwd { get; set; } = string.Empty;
     }
 
+    private class SellProductData
+    {
+        public string ProductName { get; set; } = string.Empty;
+        public int SellQuantity { get; set; }
+    }
+
     private LoginAttempt loginAttempt = new();
+
+    private SellProductData sellProductData = new();
 
     User LoggedUser = new();
 
@@ -50,6 +60,7 @@ public partial class MainWindow : Window
         GetProducts();
         AddItemGrid.DataContext = NewProduct;
         LoginForm.DataContext = loginAttempt;
+        SellProductFooter.DataContext = sellProductData;
         MainWindowUserName.Text = LoggedUser.Name;
         SearchBoxGrid.DataContext = searchText;
         SearchBox.Text = searchText.Text;
@@ -161,6 +172,7 @@ public partial class MainWindow : Window
         UserControlLoggedOff.Visibility = !logged ? Visibility.Visible : Visibility.Collapsed;
         UserControlExportButton.Visibility = logged ? Visibility.Visible : Visibility.Collapsed;
         UserControlInsertProduct.Visibility = logged ? Visibility.Visible : Visibility.Collapsed;
+        UserControlSellProduct.Visibility = logged ? Visibility.Visible : Visibility.Collapsed;
 
     }
     private void Logout(object sender, RoutedEventArgs e)
@@ -219,5 +231,30 @@ public partial class MainWindow : Window
 
 
     }
+
+
+    private void SellProduct(object sender, RoutedEventArgs e)
+    {
+        if (this.ProductCrontroller.SellProduct(sellProductData.ProductName, sellProductData.SellQuantity))
+        {
+            MessageBox.Show($"{sellProductData.SellQuantity} unidades de {sellProductData.ProductName} vendidas com sucesso",
+                "ok", MessageBoxButton.OK, MessageBoxImage.None, MessageBoxResult.Yes);
+            GetProducts();
+        }
+        else
+        {
+            MessageBox.Show($"Falha ao vender produto",
+                "erro", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.Yes);
+        }
+        sellProductData = new();
+        SellProductFooter.DataContext = sellProductData;
+    }
+
+    private void ClearSell(object sender, RoutedEventArgs e)
+    {
+        sellProductData = new();
+        SellProductFooter.DataContext = sellProductData;
+    }
+
 }
 

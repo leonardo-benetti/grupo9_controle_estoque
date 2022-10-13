@@ -24,7 +24,7 @@
                 <!-- SearchBox -->
                 <RowDefinition/>
                 <!-- data -->
-                <RowDefinition Height="30"/>
+                <RowDefinition Height="60"/>
                 <!-- data footer-->
             </Grid.RowDefinitions>
             
@@ -121,9 +121,34 @@
                     </DataGrid>
                 </StackPanel>
             </UserControl>
-            <Label Grid.Row="3"
-                   FontSize="10" Content="Data Footer"
-                   HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+
+            <UserControl Name="UserControlSellProduct" Grid.Row="3" Visibility="Collapsed">
+                <StackPanel Orientation="Horizontal" Name="SellProductFooter">
+                    <Label FontSize="12" Content="Venda de Produtos" VerticalAlignment="Center"
+                           VerticalContentAlignment="Center"/>
+
+                    <Label FontSize="12" Content="Nome:" VerticalAlignment="Center"
+                           VerticalContentAlignment="Center"
+                           Margin="10,0,0,0"/>
+                    <TextBox Width="100" Height="30"
+                             VerticalContentAlignment="Center" Margin="5,0,0,0" Text="{Binding ProductName}"/>
+                    
+                    <Label FontSize="12" Content="Quantidade vendida:" VerticalAlignment="Center"
+                           VerticalContentAlignment="Center" Margin="10,0,0,0"/>
+                    <TextBox Width="100" Height="30"
+                             VerticalContentAlignment="Center" Margin="5,0,0,0" Text="{Binding SellQuantity}"/>
+
+                    <Button Height="30" Width="50"
+                            Margin="20,0,0,0"
+                            Content="Vender" Click="SellProduct"/>
+             
+                    <Button Height="30" Width="50"
+                            Margin="20,0,0,0"
+                            Content="Limpar" Click="ClearSell"/>
+                </StackPanel>
+            </UserControl>
+            
         </Grid>
 
         <Grid Grid.Column="1">

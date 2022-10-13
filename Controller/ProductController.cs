@@ -38,15 +38,32 @@ public class ProductController
     public void EditProduct(string id, Product newProductValues)
     {   
         Product selectedProduct = Products.Where(product => product.GUID == id).Single();
-        changeProductValues(ref selectedProduct, newProductValues);
+        ChangeProductValues(ref selectedProduct, newProductValues);
         context.SaveChanges();
     }
-    private void changeProductValues(ref Product oldProductValues, Product newProductValues)
+    private void ChangeProductValues(ref Product oldProductValues, Product newProductValues)
     {
         oldProductValues.Name = newProductValues.Name;
         oldProductValues.Description = newProductValues.Description;
         oldProductValues.Price = newProductValues.Price;
         oldProductValues.Quantity = newProductValues.Quantity;
         oldProductValues.Category = newProductValues.Category;
+    }
+    public bool SellProduct(string name, int sell_quantity)
+    {
+        Product? selectedProduct = Products.Where(product => product.Name == name).FirstOrDefault();
+        
+        if (selectedProduct == null)
+            return false;
+
+        if (sell_quantity > 0 && sell_quantity <= selectedProduct.Quantity)
+        {
+            selectedProduct.Quantity -= sell_quantity;
+            Products.Update(selectedProduct);
+            context.SaveChanges();
+            return true;
+        }
+
+        return false;
     }
 }
