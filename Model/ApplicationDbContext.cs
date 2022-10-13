@@ -43,15 +43,35 @@ public class ApplicationDbContext : DbContext
 
         string productGUID = Guid.NewGuid().ToString();
         modelBuilder.Entity<Product>().HasData(
-        new Product
-        {
-            GUID = productGUID,
-            Name = "Livro",
-            Description = "O retorno do rei",
-            Price = 50,
-            Quantity = 5,
-            Category = "Fantasia"
-        });
+            new Product[] {
+                new Product
+                {
+                    GUID = productGUID,
+                    Name = "O retorno do rei",
+                    Description = "Livro",
+                    Price = 50,
+                    Quantity = 5,
+                    Category = "Livro"
+                },
+                new Product
+                {
+                    GUID = Guid.NewGuid().ToString(),
+                    Name = "A riqueza das nações",
+                    Description = "Livro, Adam Smith",
+                    Price = 35,
+                    Quantity = 8,
+                    Category = "Livro"
+                },
+                new Product
+                {
+                    GUID = Guid.NewGuid().ToString(),
+                    Name = "Smart TV Samsung",
+                    Description = "58 Polegadas",
+                    Price = 2200,
+                    Quantity = 3,
+                    Category = "TV"
+                }
+            });
 
         modelBuilder.Entity<Notification>().HasData(
         new Notification
