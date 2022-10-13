@@ -23,6 +23,7 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<User> Users { get; set; }
     public DbSet<Product> Products { get; set; }
+    public DbSet<Notification> Notification { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -40,16 +41,47 @@ public class ApplicationDbContext : DbContext
             Profile_pic = ""
         });
 
+        string productGUID = Guid.NewGuid().ToString();
         modelBuilder.Entity<Product>().HasData(
-        new Product
+            new Product[] {
+                new Product
+                {
+                    GUID = productGUID,
+                    Name = "O retorno do rei",
+                    Description = "Livro",
+                    Price = 50,
+                    Quantity = 5,
+                    Category = "Livro"
+                },
+                new Product
+                {
+                    GUID = Guid.NewGuid().ToString(),
+                    Name = "A riqueza das nações",
+                    Description = "Livro, Adam Smith",
+                    Price = 35,
+                    Quantity = 8,
+                    Category = "Livro"
+                },
+                new Product
+                {
+                    GUID = Guid.NewGuid().ToString(),
+                    Name = "Smart TV Samsung",
+                    Description = "58 Polegadas",
+                    Price = 2200,
+                    Quantity = 3,
+                    Category = "TV"
+                }
+            });
+
+        modelBuilder.Entity<Notification>().HasData(
+        new Notification
         {
-            GUID = Guid.NewGuid().ToString(),
-            Name = "Livro",
-            Description = "O retorno do rei",
-            Price = 50,
-            Quantity = 5,
-            Category = "Fantasia"
-        }); ;
+            UserID = 1,
+            ProductID = productGUID,
+            MinQuantity = 5,
+        });
+
+        modelBuilder.Entity<Notification>().HasKey(notification => new { notification.UserID, notification.ProductID });
 
         base.OnModelCreating(modelBuilder);
     }
