@@ -29,7 +29,7 @@
         <UserControl Name="UserControlTriggeredAlerts" Grid.Row="2" Visibility="Visible">
             <StackPanel>
                 <DataGrid x:Name="NotificationGridTriggeredAlerts" AutoGenerateColumns="False" IsReadOnly="False"
-                CanUserAddRows="True" ColumnWidth="*" Margin="5" IsSynchronizedWithCurrentItem="True">
+                CanUserAddRows="False" ColumnWidth="*" Margin="5" IsSynchronizedWithCurrentItem="True">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Header="Status" MaxWidth="50">
                             <DataGridTemplateColumn.CellTemplate>

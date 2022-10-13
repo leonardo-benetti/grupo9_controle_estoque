@@ -11,22 +11,33 @@ namespace grupo9_controle_estoque;
 public partial class NotificationWindow : Window
 {
     private NotificationController notificationController;
-    private List<Notification> notificationList;
-    public NotificationWindow(NotificationController notificationController)
+    private ProductController productController;
+    private List<Notification> notificationTriggeredList;
+    public NotificationWindow(NotificationController notificationController, ProductController productController)
     {
         InitializeComponent();
         this.notificationController = notificationController;
-        NotificationGridTriggeredAlerts.ItemsSource = this.notificationController.GetNotifications();
-        NotificationGridAllAlerts.ItemsSource = new List<Notification>();
+        this.productController = productController;
 
+        this.notificationTriggeredList = this.GetTriggeredNotifications();
+
+        NotificationGridTriggeredAlerts.ItemsSource = this.notificationTriggeredList;
+        NotificationGridAllAlerts.ItemsSource = this.notificationController.GetNotifications();
     }
-
+    private Product? FindProduct(string ID)
+    {
+        return this.productController.GetProducts().Find(product => product.GUID == ID);
+    }
+    private List<Notification> GetTriggeredNotifications()
+    {
+        var triggeredNotifications = this.notificationController.GetNotifications().FindAll(notification => FindProduct(notification.ProductID)?.Quantity <= notification.MinQuantity);
+        return triggeredNotifications;
+    }
     private void SelectionBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
     {
         if(UserControlTriggeredAlerts != null && UserControlAllAlerts != null)
         {
             string text = (e.AddedItems[0] as ComboBoxItem).Content as string;
-            MessageBox.Show(text);
 
             if(text == "Notificações alertas")
             {
