@@ -6,11 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
 
 namespace grupo9_controle_estoque.Controller;
-
-public class ProductControllerObservable: ObservableCollection<ProductController>
-{
-
-}
 public class ProductController
 {
     private readonly ApplicationDbContext context;

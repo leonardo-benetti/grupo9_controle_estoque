@@ -19,6 +19,7 @@ public partial class MainWindow : Window
     private readonly ApplicationDbContext context;
     private readonly UserController UserController;
     private readonly ProductController ProductCrontroller;
+    private readonly NotificationController NotificationController;
 
     private readonly string CurrentDir = Path.GetFullPath(@"..\..\..\");
 
@@ -56,6 +57,7 @@ public partial class MainWindow : Window
         this.context = context;
         this.UserController = new UserController(context);
         this.ProductCrontroller = new ProductController(context);
+        this.NotificationController = new NotificationController(context);
         InitializeComponent();
         GetProducts();
         AddItemGrid.DataContext = NewProduct;
@@ -73,6 +75,8 @@ public partial class MainWindow : Window
         // Create a BitmapSource
         BitmapImage bitmap = new BitmapImage();
         bitmap.BeginInit();
+        BitmapImage bitmapNotify = new BitmapImage();
+        bitmapNotify.BeginInit();
 
         if (LoggedUser.Profile_pic == string.Empty)
         {
@@ -85,20 +89,22 @@ public partial class MainWindow : Window
         bitmap.EndInit();
         // Add Image to Window
         MainWindowProfilePic.Source = bitmap;
-    }
-        
-    private void GetFilteredProducts(object s, RoutedEventArgs e)
 
+        bitmapNotify.UriSource = new Uri(Path.Combine(CurrentDir, "PersistentData", "Icons", "notifyIcon.jpg"), UriKind.Absolute);
+        bitmapNotify.EndInit();
+        NotifyImage.Source = bitmapNotify;
+    }
+    private void SearchBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
     {
-        if(this.searchText.Text != "")
+        string text = SearchBox.Text;
+        if (text != "" && text != "Filtro")
         {
-            ProductDataGrid.ItemsSource = this.ProductCrontroller.GetProducts().FindAll(product => product.Name.Contains(this.searchText.Text, StringComparison.OrdinalIgnoreCase)).ToArray();
+            ProductDataGrid.ItemsSource = this.ProductCrontroller.GetProducts().FindAll(product => product.Name.Contains(text, StringComparison.OrdinalIgnoreCase)).ToArray();
         }
         else
         {
             GetProducts();
         }
-
     }
     private void GetProducts()
     {
@@ -173,6 +179,7 @@ public partial class MainWindow : Window
         UserControlExportButton.Visibility = logged ? Visibility.Visible : Visibility.Collapsed;
         UserControlInsertProduct.Visibility = logged ? Visibility.Visible : Visibility.Collapsed;
         UserControlSellProduct.Visibility = logged ? Visibility.Visible : Visibility.Collapsed;
+        UserControlNotification.Visibility = logged ? Visibility.Visible : Visibility.Collapsed;
 
     }
     private void Logout(object sender, RoutedEventArgs e)
@@ -201,6 +208,13 @@ public partial class MainWindow : Window
         EditWindow editWindow = new EditWindow(productToEdit, this.ProductCrontroller);
         editWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         editWindow.ShowDialog();
+        GetProducts();
+    }  
+    private void ShowNotifications(object s, RoutedEventArgs e)
+    {
+        NotificationWindow notifications = new NotificationWindow(this.NotificationController, this.ProductCrontroller);
+        notifications.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+        notifications.ShowDialog();
         GetProducts();
     }
 
@@ -231,7 +245,6 @@ public partial class MainWindow : Window
 
 
     }
-
 
     private void SellProduct(object sender, RoutedEventArgs e)
     {
