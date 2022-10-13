@@ -17,6 +17,7 @@ public partial class MainWindow : Window
     private readonly ApplicationDbContext context;
     private readonly UserController UserController;
     private readonly ProductController ProductCrontroller;
+    private readonly NotificationController NotificationController;
 
     private readonly string CurrentDir = Path.GetFullPath(@"..\..\..\");
 
@@ -46,6 +47,7 @@ public partial class MainWindow : Window
         this.context = context;
         this.UserController = new UserController(context);
         this.ProductCrontroller = new ProductController(context);
+        this.NotificationController = new NotificationController(context);
         InitializeComponent();
         GetProducts();
         AddItemGrid.DataContext = NewProduct;
@@ -81,19 +83,17 @@ public partial class MainWindow : Window
         bitmapNotify.EndInit();
         NotifyImage.Source = bitmapNotify;
     }
-        
-    private void GetFilteredProducts(object s, RoutedEventArgs e)
-
+    private void SearchBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
     {
-        if(this.searchText.Text != "")
+        string text = SearchBox.Text;
+        if (text != "" && text != "Filtro")
         {
-            ProductDataGrid.ItemsSource = this.ProductCrontroller.GetProducts().FindAll(product => product.Name.Contains(this.searchText.Text, StringComparison.OrdinalIgnoreCase)).ToArray();
+            ProductDataGrid.ItemsSource = this.ProductCrontroller.GetProducts().FindAll(product => product.Name.Contains(text, StringComparison.OrdinalIgnoreCase)).ToArray();
         }
         else
         {
             GetProducts();
         }
-
     }
     private void GetProducts()
     {
@@ -200,7 +200,7 @@ public partial class MainWindow : Window
     }  
     private void ShowNotifications(object s, RoutedEventArgs e)
     {
-        NotificationWindow notifications = new NotificationWindow(this.LoggedUser);
+        NotificationWindow notifications = new NotificationWindow(this.NotificationController);
         notifications.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         notifications.ShowDialog();
         GetProducts();
@@ -233,5 +233,6 @@ public partial class MainWindow : Window
 
 
     }
+
 }
 
