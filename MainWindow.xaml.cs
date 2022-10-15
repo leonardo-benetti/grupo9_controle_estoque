@@ -38,7 +38,7 @@ public partial class MainWindow : Window
 
     private class SellProductData
     {
-        public string ProductName { get; set; } = string.Empty;
+        public int ProductId { get; set; }
         public int SellQuantity { get; set; }
     }
 
@@ -115,7 +115,7 @@ public partial class MainWindow : Window
     private void EditProduct(object s, RoutedEventArgs e)
     {
         selectedProduct = (s as FrameworkElement).DataContext as Product;
-        this.ProductCrontroller.EditProduct(selectedProduct.GUID, NewProduct);
+        this.ProductCrontroller.EditProduct(selectedProduct.Id, NewProduct);
         NewProduct = new Product();
         GetProducts();
     }
@@ -248,9 +248,11 @@ public partial class MainWindow : Window
 
     private void SellProduct(object sender, RoutedEventArgs e)
     {
-        if (this.ProductCrontroller.SellProduct(sellProductData.ProductName, sellProductData.SellQuantity))
+        Product? resultProduct = this.ProductCrontroller.SellProduct(sellProductData.ProductId, sellProductData.SellQuantity);
+        
+        if (resultProduct != null)
         {
-            MessageBox.Show($"{sellProductData.SellQuantity} unidades de {sellProductData.ProductName} vendidas com sucesso",
+            MessageBox.Show($"{sellProductData.SellQuantity} unidades de {resultProduct.Name} vendidas com sucesso",
                 "ok", MessageBoxButton.OK, MessageBoxImage.None, MessageBoxResult.Yes);
             GetProducts();
         }

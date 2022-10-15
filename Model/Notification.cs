@@ -12,7 +12,7 @@ public class Notification
 
     [Key]
     [Column(Order = 2)]
-    public string ProductID { get; set; } = string.Empty;
+    public int ProductID { get; set; } = 0;
 
     [Column(TypeName = "INT")]
     public int? MinQuantity { get; set; } = null;

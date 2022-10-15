@@ -9,7 +9,7 @@ public class Product
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public string GUID { get; set; } = string.Empty;
+    public int Id { get; set; }
 
     [Column(TypeName = "VARCHAR(150)")]
     public string Name { get; set; } = string.Empty;
