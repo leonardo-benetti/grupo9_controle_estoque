@@ -128,10 +128,20 @@ public partial class MainWindow : Window
     }
     private void AddItem(object s, RoutedEventArgs e)
     {
-        this.ProductCrontroller.AddItem(NewProduct);
-        GetProducts();
-        NewProduct = new Product();
-        AddItemGrid.DataContext = NewProduct;
+        if (this.ProductCrontroller.AddItem(NewProduct))
+        {
+            GetProducts();
+            MessageBox.Show($"{NewProduct.Name} inserido com sucesso",
+                "ok", MessageBoxButton.OK, MessageBoxImage.None, MessageBoxResult.Yes);
+            NewProduct = new Product();
+            AddItemGrid.DataContext = NewProduct;
+        }
+        else
+        {
+            MessageBox.Show($"Falha ao inserir produto, verifique os dados fornecidos!",
+                "erro", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.Yes);
+        }
+        
     }
     private void ProductDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
     {

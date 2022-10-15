@@ -24,10 +24,15 @@ public class ProductController
         Products.Remove(selectedProduct);
         context.SaveChanges();
     }
-    public void AddItem(Product newProduct)
+    public bool AddItem(Product newProduct)
     {
-        Products.Add(newProduct);
-        context.SaveChanges();
+        if (newProduct != null && newProduct.Price != null && newProduct.Quantity != null)
+        {
+            Products.Add(newProduct);
+            context.SaveChanges();
+            return true;
+        }
+        return false;
     }
     public void EditProduct(int id, Product newProductValues)
     {   
