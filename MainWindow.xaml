@@ -123,7 +123,7 @@
                 </StackPanel>
             </UserControl>
 
-
+            <Border Grid.Row="3" BorderThickness="0.5" BorderBrush="Black"/>
             <UserControl Name="UserControlSellProduct" Grid.Row="3" Visibility="Collapsed">
                 <StackPanel Orientation="Horizontal" Name="SellProductFooter">
                     <Label FontSize="12" Content="Venda de Produtos" VerticalAlignment="Center"
