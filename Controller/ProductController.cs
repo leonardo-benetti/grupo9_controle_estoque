@@ -24,24 +24,42 @@ public class ProductController
         Products.Remove(selectedProduct);
         context.SaveChanges();
     }
-    public void AddItem(Product newProduct)
+    public bool AddItem(Product newProduct)
     {
-        newProduct.GUID = Guid.NewGuid().ToString();
-        Products.Add(newProduct);
-        context.SaveChanges();
+        if (newProduct != null && newProduct.Price != null && newProduct.Quantity != null)
+        {
+            Products.Add(newProduct);
+            context.SaveChanges();
+            return true;
+        }
+        return false;
     }
-    public void EditProduct(string id, Product newProductValues)
+    public void EditProduct(int id, Product newProductValues)
     {   
-        Product selectedProduct = Products.Where(product => product.GUID == id).Single();
-        changeProductValues(ref selectedProduct, newProductValues);
+        Product selectedProduct = Products.Where(product => product.Id == id).Single();
+        ChangeProductValues(ref selectedProduct, newProductValues);
         context.SaveChanges();
     }
-    private void changeProductValues(ref Product oldProductValues, Product newProductValues)
+    private void ChangeProductValues(ref Product oldProductValues, Product newProductValues)
     {
         oldProductValues.Name = newProductValues.Name;
         oldProductValues.Description = newProductValues.Description;
         oldProductValues.Price = newProductValues.Price;
         oldProductValues.Quantity = newProductValues.Quantity;
         oldProductValues.Category = newProductValues.Category;
+    }
+    public Product? SellProduct(int id, int sell_quantity)
+    {
+        Product? selectedProduct = Products.Where(product => product.Id == id).FirstOrDefault();
+
+        if (selectedProduct != null && sell_quantity > 0 && sell_quantity <= selectedProduct.Quantity)
+        {
+            selectedProduct.Quantity -= sell_quantity;
+            Products.Update(selectedProduct);
+            context.SaveChanges();
+            return selectedProduct;
+        }
+
+        return null;
     }
 }

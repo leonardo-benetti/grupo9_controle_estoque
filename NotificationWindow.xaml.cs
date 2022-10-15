@@ -24,9 +24,9 @@ public partial class NotificationWindow : Window
         NotificationGridTriggeredAlerts.ItemsSource = this.notificationTriggeredList;
         NotificationGridAllAlerts.ItemsSource = this.notificationController.GetNotifications();
     }
-    private Product? FindProduct(string ID)
+    private Product? FindProduct(int ID)
     {
-        return this.productController.GetProducts().Find(product => product.GUID == ID);
+        return this.productController.GetProducts().Find(product => product.Id == ID);
     }
     private List<Notification> GetTriggeredNotifications()
     {

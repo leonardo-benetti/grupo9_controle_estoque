@@ -41,21 +41,20 @@ public class ApplicationDbContext : DbContext
             Profile_pic = ""
         });
 
-        string productGUID = Guid.NewGuid().ToString();
         modelBuilder.Entity<Product>().HasData(
             new Product[] {
                 new Product
                 {
-                    GUID = productGUID,
+                    Id = 1,
                     Name = "O retorno do rei",
-                    Description = "Livro",
+                    Description = "Livro, Tolkien",
                     Price = 50,
                     Quantity = 5,
                     Category = "Livro"
                 },
                 new Product
                 {
-                    GUID = Guid.NewGuid().ToString(),
+                    Id = 2,
                     Name = "A riqueza das nações",
                     Description = "Livro, Adam Smith",
                     Price = 35,
@@ -64,7 +63,7 @@ public class ApplicationDbContext : DbContext
                 },
                 new Product
                 {
-                    GUID = Guid.NewGuid().ToString(),
+                    Id = 3,
                     Name = "Smart TV Samsung",
                     Description = "58 Polegadas",
                     Price = 2200,
@@ -77,7 +76,7 @@ public class ApplicationDbContext : DbContext
         new Notification
         {
             UserID = 1,
-            ProductID = productGUID,
+            ProductID = 1,
             MinQuantity = 5,
         });
 

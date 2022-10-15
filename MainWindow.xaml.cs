@@ -7,6 +7,8 @@ using System.IO;
 using System.Collections.Generic;
 using System.Threading;
 using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Wordprocessing;
+using System.Drawing;
 
 namespace grupo9_controle_estoque;
 /// <summary>
@@ -34,7 +36,15 @@ public partial class MainWindow : Window
         public string Pwd { get; set; } = string.Empty;
     }
 
+    private class SellProductData
+    {
+        public int ProductId { get; set; }
+        public int SellQuantity { get; set; }
+    }
+
     private LoginAttempt loginAttempt = new();
+
+    private SellProductData sellProductData = new();
 
     User LoggedUser = new();
 
@@ -52,6 +62,7 @@ public partial class MainWindow : Window
         GetProducts();
         AddItemGrid.DataContext = NewProduct;
         LoginForm.DataContext = loginAttempt;
+        SellProductFooter.DataContext = sellProductData;
         MainWindowUserName.Text = LoggedUser.Name;
         SearchBoxGrid.DataContext = searchText;
         SearchBox.Text = searchText.Text;
@@ -104,7 +115,7 @@ public partial class MainWindow : Window
     private void EditProduct(object s, RoutedEventArgs e)
     {
         selectedProduct = (s as FrameworkElement).DataContext as Product;
-        this.ProductCrontroller.EditProduct(selectedProduct.GUID, NewProduct);
+        this.ProductCrontroller.EditProduct(selectedProduct.Id, NewProduct);
         NewProduct = new Product();
         GetProducts();
     }
@@ -117,10 +128,20 @@ public partial class MainWindow : Window
     }
     private void AddItem(object s, RoutedEventArgs e)
     {
-        this.ProductCrontroller.AddItem(NewProduct);
-        GetProducts();
-        NewProduct = new Product();
-        AddItemGrid.DataContext = NewProduct;
+        if (this.ProductCrontroller.AddItem(NewProduct))
+        {
+            GetProducts();
+            MessageBox.Show($"{NewProduct.Name} inserido com sucesso",
+                "ok", MessageBoxButton.OK, MessageBoxImage.None, MessageBoxResult.Yes);
+            NewProduct = new Product();
+            AddItemGrid.DataContext = NewProduct;
+        }
+        else
+        {
+            MessageBox.Show($"Falha ao inserir produto, verifique os dados fornecidos!",
+                "erro", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.Yes);
+        }
+        
     }
     private void ProductDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
     {
@@ -167,6 +188,7 @@ public partial class MainWindow : Window
         UserControlLoggedOff.Visibility = !logged ? Visibility.Visible : Visibility.Collapsed;
         UserControlExportButton.Visibility = logged ? Visibility.Visible : Visibility.Collapsed;
         UserControlInsertProduct.Visibility = logged ? Visibility.Visible : Visibility.Collapsed;
+        UserControlSellProduct.Visibility = logged ? Visibility.Visible : Visibility.Collapsed;
         UserControlNotification.Visibility = logged ? Visibility.Visible : Visibility.Collapsed;
 
     }
@@ -232,6 +254,31 @@ public partial class MainWindow : Window
         }
 
 
+    }
+
+    private void SellProduct(object sender, RoutedEventArgs e)
+    {
+        Product? resultProduct = this.ProductCrontroller.SellProduct(sellProductData.ProductId, sellProductData.SellQuantity);
+        
+        if (resultProduct != null)
+        {
+            MessageBox.Show($"{sellProductData.SellQuantity} unidades de {resultProduct.Name} vendidas com sucesso",
+                "ok", MessageBoxButton.OK, MessageBoxImage.None, MessageBoxResult.Yes);
+            GetProducts();
+        }
+        else
+        {
+            MessageBox.Show($"Falha ao vender produto",
+                "erro", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.Yes);
+        }
+        sellProductData = new();
+        SellProductFooter.DataContext = sellProductData;
+    }
+
+    private void ClearSell(object sender, RoutedEventArgs e)
+    {
+        sellProductData = new();
+        SellProductFooter.DataContext = sellProductData;
     }
 
 }

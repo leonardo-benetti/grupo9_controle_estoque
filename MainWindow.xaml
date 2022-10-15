@@ -24,7 +24,7 @@
                 <!-- SearchBox -->
                 <RowDefinition/>
                 <!-- data -->
-                <RowDefinition Height="30"/>
+                <RowDefinition Height="60"/>
                 <!-- data footer-->
             </Grid.RowDefinitions>
             
@@ -49,6 +49,7 @@
                     <DataGrid x:Name="ProductDataGrid" AutoGenerateColumns="False" IsReadOnly="True"
                                   ColumnWidth="*" Margin="5" IsSynchronizedWithCurrentItem="True">
                         <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="40"/>
                             <DataGridTextColumn Header="Nome" Binding="{Binding Name}"/>
                             <DataGridTextColumn Header="Categoria" Binding="{Binding Category}"/>
                             <DataGridTextColumn Header="Preço" Binding="{Binding Price}"/>
@@ -87,6 +88,7 @@
                     <DataGrid x:Name="ProductDataGridOff" AutoGenerateColumns="False" IsReadOnly="True"
                                   ColumnWidth="*" Margin="5" IsSynchronizedWithCurrentItem="True">
                         <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="40"/>
                             <DataGridTextColumn Header="Nome" Binding="{Binding Name}"/>
                             <DataGridTextColumn Header="Categoria" Binding="{Binding Category}"/>
                             <DataGridTextColumn Header="Preço" Binding="{Binding Price}"/>
@@ -120,9 +122,34 @@
                     </DataGrid>
                 </StackPanel>
             </UserControl>
-            <Label Grid.Row="3"
-                   FontSize="10" Content="Data Footer"
-                   HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+
+            <UserControl Name="UserControlSellProduct" Grid.Row="3" Visibility="Collapsed">
+                <StackPanel Orientation="Horizontal" Name="SellProductFooter">
+                    <Label FontSize="12" Content="Venda de Produtos" VerticalAlignment="Center"
+                           VerticalContentAlignment="Center"/>
+
+                    <Label FontSize="12" Content="ID:" VerticalAlignment="Center"
+                           VerticalContentAlignment="Center"
+                           Margin="10,0,0,0"/>
+                    <TextBox Width="100" Height="30"
+                             VerticalContentAlignment="Center" Margin="5,0,0,0" Text="{Binding ProductId}"/>
+                    
+                    <Label FontSize="12" Content="Quantidade vendida:" VerticalAlignment="Center"
+                           VerticalContentAlignment="Center" Margin="10,0,0,0"/>
+                    <TextBox Width="100" Height="30"
+                             VerticalContentAlignment="Center" Margin="5,0,0,0" Text="{Binding SellQuantity}"/>
+
+                    <Button Height="30" Width="50"
+                            Margin="20,0,0,0"
+                            Content="Vender" Click="SellProduct"/>
+             
+                    <Button Height="30" Width="50"
+                            Margin="20,0,0,0"
+                            Content="Limpar" Click="ClearSell"/>
+                </StackPanel>
+            </UserControl>
+            
         </Grid>
 
         <Grid Grid.Column="1">
@@ -225,19 +252,19 @@
                             </Grid.ColumnDefinitions>
 
                             <Label Grid.Row="0" FontSize="10" Grid.Column="0" Content="Nome"/>
-                            <TextBox Grid.Row="0" FontSize="10" Grid.Column="1" Text="{Binding Name}"/>
+                            <TextBox Grid.Row="0" FontSize="10" Grid.Column="1" VerticalContentAlignment="Center" Text="{Binding Name}"/>
 
                             <Label Grid.Row="1" FontSize="10" Grid.Column="0" Content="Descrição"/>
-                            <TextBox Grid.Row="1" FontSize="10" Grid.Column="1" Text="{Binding Description}"/>
+                            <TextBox Grid.Row="1" FontSize="10" Grid.Column="1" VerticalContentAlignment="Center" Text="{Binding Description}"/>
 
                             <Label Grid.Row="2" FontSize="10" Grid.Column="0" Content="Preço"/>
-                            <TextBox Grid.Row="2" FontSize="10" Grid.Column="1" Text="{Binding Price}"/>
+                            <TextBox Grid.Row="2" FontSize="10" Grid.Column="1" VerticalContentAlignment="Center" Text="{Binding Price}"/>
 
                             <Label Grid.Row="3" FontSize="10" Grid.Column="0" Content="Quantidade"/>
-                            <TextBox Grid.Row="3" FontSize="10" Grid.Column="1" Text="{Binding Quantity}"/>
+                            <TextBox Grid.Row="3" FontSize="10" Grid.Column="1" VerticalContentAlignment="Center" Text="{Binding Quantity}"/>
 
                             <Label Grid.Row="4" FontSize="10" Grid.Column="0" Content="Categoria"/>
-                            <TextBox Grid.Row="4" FontSize="10" Grid.Column="1" Text="{Binding Category}"/>
+                            <TextBox Grid.Row="4" FontSize="10" Grid.Column="1" VerticalContentAlignment="Center" Text="{Binding Category}"/>
 
                             <Button Grid.Row="5" FontSize="10" Grid.ColumnSpan="2" Width="80" Content="Adicionar"
                                 Margin="10"

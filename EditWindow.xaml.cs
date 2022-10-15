@@ -20,7 +20,7 @@ public partial class EditWindow : Window
         this.product = product;
         this.productController = productController;
         this.newProduct = new Product() {
-            GUID = product.GUID,
+            Id = product.Id,
             Category = product.Category,
             Name = product.Name,
             Price = product.Price,
@@ -35,7 +35,7 @@ public partial class EditWindow : Window
 
     private void SaveChanges(object s, RoutedEventArgs e)
     {
-        this.productController.EditProduct(this.product.GUID, this.newProduct);
+        this.productController.EditProduct(this.product.Id, this.newProduct);
         this.Close();
     }
 
