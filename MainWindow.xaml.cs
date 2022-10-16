@@ -222,7 +222,7 @@ public partial class MainWindow : Window
     }  
     private void ShowNotifications(object s, RoutedEventArgs e)
     {
-        NotificationWindow notifications = new NotificationWindow(this.NotificationController, this.ProductCrontroller);
+        NotificationWindow notifications = new NotificationWindow(this.NotificationController, this.ProductCrontroller, this.LoggedUser);
         notifications.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         notifications.ShowDialog();
         GetProducts();
