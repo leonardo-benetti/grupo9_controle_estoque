@@ -182,6 +182,7 @@ public partial class MainWindow : Window
         MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
         loginAttempt = new();
         LoginForm.DataContext = loginAttempt;
+        LoginPasswordBox.Password = String.Empty;
     }
 
     private void LoginVisibility(bool logged)
@@ -200,6 +201,7 @@ public partial class MainWindow : Window
     {
         loginAttempt = new();
         LoggedUser = new();
+        LoginPasswordBox.Password = String.Empty;
         LoginForm.DataContext = loginAttempt;
         MainWindowUserName.Text = LoggedUser.Name;
         this.isLogedIn = false;

@@ -34,7 +34,12 @@
                         <DataGridTemplateColumn Header="Status" MaxWidth="50">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-
+                                    <Image
+                                       Name="AlertPic"
+                                       Source="PersistentData/Icons/alertIcon.png"
+                                       Height="10" Width="10"
+                                       Margin="0"
+                                       />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

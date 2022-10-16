@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using grupo9_controle_estoque.Model;
 using grupo9_controle_estoque.Controller;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
+using System;
+using System.IO;
 
 namespace grupo9_controle_estoque;
 /// <summary>
@@ -10,6 +13,7 @@ namespace grupo9_controle_estoque;
 /// </summary>
 public partial class NotificationWindow : Window
 {
+    private readonly string CurrentDir = Path.GetFullPath(@"..\..\..\");
     private NotificationController notificationController;
     private ProductController productController;
     private User LoggedUser;
