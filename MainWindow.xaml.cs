@@ -153,6 +153,10 @@ public partial class MainWindow : Window
         registerWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         registerWindow.Show();
     }
+    private void passwordBox_PasswordChanged(object sender, RoutedEventArgs e)
+    {
+        this.loginAttempt.Pwd = LoginPasswordBox.Password;
+    }
 
     private void TryLogin(object sender, RoutedEventArgs e)
     {
