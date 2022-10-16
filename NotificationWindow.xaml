@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:grupo9_controle_estoque"
         mc:Ignorable="d"
-        Title="NotificationWindow" Height="300" Width="500">
+        Title="NotificationWindow" Height="350" Width="600">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -21,10 +21,10 @@
                Margin="1"
                Grid.Row="0"
                Content="Notificações"/>
-        <ComboBox Name="SelectionBox" Grid.Row="1" Width="130" Height="22" 
-                  HorizontalAlignment="Left" Margin="5,2,0,0" SelectedIndex="0" VerticalAlignment="Top" SelectionChanged="SelectionBox_SelectionChanged">
-            <ComboBoxItem Content="Notificações alertas"/>
-            <ComboBoxItem Content="Todas Notificações"/>
+        <ComboBox Name="SelectionBox" Grid.Row="1" Width="150" Height="22" 
+                  HorizontalAlignment="Left" Margin="5,1,0,1" SelectedIndex="0" VerticalAlignment="Top" SelectionChanged="SelectionBox_SelectionChanged">
+            <ComboBoxItem Content="Alertas"/>
+            <ComboBoxItem Content="Notificações criadas"/>
         </ComboBox>
         <UserControl Name="UserControlTriggeredAlerts" Grid.Row="2" Visibility="Visible">
             <StackPanel>
@@ -34,7 +34,12 @@
                         <DataGridTemplateColumn Header="Status" MaxWidth="50">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-
+                                    <Image
+                                       Name="AlertPic"
+                                       Source="PersistentData/Icons/alertIcon.png"
+                                       Height="10" Width="10"
+                                       Margin="0"
+                                       />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -48,7 +53,7 @@
         <UserControl Name="UserControlAllAlerts" Grid.Row="2" Visibility="Collapsed">
             <StackPanel>
                 <DataGrid x:Name="NotificationGridAllAlerts" AutoGenerateColumns="False" IsReadOnly="False"
-                CanUserAddRows="True" ColumnWidth="*" Margin="5" IsSynchronizedWithCurrentItem="True">
+                CanUserAddRows="False" ColumnWidth="*" Margin="5" IsSynchronizedWithCurrentItem="True">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Header="Status" MaxWidth="50">
                             <DataGridTemplateColumn.CellTemplate>
@@ -60,17 +65,52 @@
                         <DataGridTextColumn Header="Id Usuário" Binding="{Binding UserID}"/>
                         <DataGridTextColumn Header="Id Produto" Binding="{Binding ProductID}"/>
                         <DataGridTextColumn Header="Quantidade Mínima" Binding="{Binding MinQuantity}"/>
+                        <DataGridTemplateColumn Header="Deletar" MaxWidth="80">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Deletar" Click="DeleteNotification"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
         </UserControl>
         <Grid Grid.Row="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" HorizontalAlignment="Right" Content="Salvar" Width="70" Height="25" Margin="10,10,30,10" Click="Save"/>
-            <Button Grid.Column="1" HorizontalAlignment="Left" Content="Cancelar" Width="70" Height="25" Margin="30,10,10,10" Click="Cancel"/>
+            <UserControl Name="UserControlButtonsAlerts" Visibility="Visible">
+                <Grid>
+                    <Button HorizontalAlignment="Center" Content="Okay" 
+                            Width="70" Height="25" Margin="10,10,30,10" 
+                            Click="Close"/>
+                </Grid>
+            </UserControl>
+            <UserControl Name="UserControlButtonsAllNotifications" Visibility="Collapsed">
+                <StackPanel Orientation="Horizontal" Name="AddNotificationFooter">
+                    <Label FontSize="12" Content="Novo Alerta" VerticalAlignment="Center"
+                           FontWeight="Bold" VerticalContentAlignment="Center"/>
+
+                    <Label FontSize="12" Content="ID Produto:" VerticalAlignment="Center"
+                           VerticalContentAlignment="Center"
+                           Margin="10,0,0,0"/>
+                    <TextBox Width="50" Height="20" 
+                             VerticalContentAlignment="Center" Margin="0" 
+                             Text="{Binding ProductID}"/>
+
+                    <Label FontSize="12" Content="Quantidade mínima:" VerticalAlignment="Center"
+                           VerticalContentAlignment="Center" Margin="10,0,0,0"/>
+                    <TextBox Width="50" Height="20"
+                             VerticalContentAlignment="Center" Margin="0" 
+                             Text="{Binding MinQuantity}"/>
+
+                    <Button Height="20" Width="50"
+                            Margin="20,0,0,0"
+                            Content="Criar" Click="CreateAlert"/>
+
+                    <Button Height="20" Width="50"
+                            Margin="20,0,0,0"
+                            Content="Fechar" Click="Close"/>
+                </StackPanel>
+            </UserControl>
         </Grid>
     </Grid>
 </Window>

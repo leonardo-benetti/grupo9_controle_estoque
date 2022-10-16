@@ -123,7 +123,7 @@
                 </StackPanel>
             </UserControl>
 
-
+            <Border Grid.Row="3" BorderThickness="0.5" BorderBrush="Black"/>
             <UserControl Name="UserControlSellProduct" Grid.Row="3" Visibility="Collapsed">
                 <StackPanel Orientation="Horizontal" Name="SellProductFooter">
                     <Label FontSize="12" Content="Venda de Produtos" VerticalAlignment="Center"
@@ -213,7 +213,9 @@
                             <TextBox Grid.Row="0" FontSize="10" Grid.Column="1" VerticalContentAlignment="Center" Text="{Binding Name}"/>
 
                             <Label Grid.Row="1" FontSize="10" Grid.Column="0" Content="senha"/>
-                            <TextBox Grid.Row="1" FontSize="10" Grid.Column="1" VerticalContentAlignment="Center" Text="{Binding Pwd}"/>
+                            <PasswordBox Grid.Row="1" FontSize="10" Grid.Column="1" VerticalContentAlignment="Center"
+                                x:Name="LoginPasswordBox" Width="200" MaxLength="16"
+                                PasswordChanged="passwordBox_PasswordChanged"/>
 
                             <Button Grid.Row="2" FontSize="10" Grid.ColumnSpan="2" VerticalContentAlignment="Center" Width="80" Content="login"
                                 Margin="10"

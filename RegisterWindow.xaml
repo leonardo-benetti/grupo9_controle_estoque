@@ -19,7 +19,7 @@
         </Grid.RowDefinitions>
 
         <Label Grid.Row="0"  FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center"
-               Content="Arraste e solte uma foto de perfil no campo abaixo"/>
+               Content="Clique no campo abaixo para inserir uma foto"/>
 
 
         <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1"
@@ -33,12 +33,14 @@
                    Height="80"
                    />
         </Border>
-
         <Label Grid.Row="2" HorizontalAlignment="Center" FontSize="10" Content="Nome"/>
         <TextBox Grid.Row="3" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="200" Height="30" FontSize="10" Text="{Binding Name}"/>
 
         <Label Grid.Row="4"  HorizontalAlignment="Center" FontSize="10" Content="Senha"/>
-        <TextBox Grid.Row="5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="200" Height="30" FontSize="10" Text="{Binding Pwd}"/>
+        <PasswordBox Grid.Row="5" FontSize="10" VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"
+            x:Name="RegisterPasswordBox" Width="200" Height="30"
+            PasswordChanged="passwordBox_PasswordChanged"/>
 
         <Button Grid.Row="6" Height="30" Width="100" VerticalAlignment="Top"
                 Margin="0,20,0,20"

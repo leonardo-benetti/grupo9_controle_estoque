@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using grupo9_controle_estoque.Model;
 using grupo9_controle_estoque.Controller;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
+using System;
+using System.IO;
 
 namespace grupo9_controle_estoque;
 /// <summary>
@@ -10,53 +13,90 @@ namespace grupo9_controle_estoque;
 /// </summary>
 public partial class NotificationWindow : Window
 {
+    private readonly string CurrentDir = Path.GetFullPath(@"..\..\..\");
     private NotificationController notificationController;
     private ProductController productController;
-    private List<Notification> notificationTriggeredList;
-    public NotificationWindow(NotificationController notificationController, ProductController productController)
+    private User LoggedUser;
+    private Notification newNotification = new();
+
+    public NotificationWindow(NotificationController notificationController, ProductController productController, User LoggedUser)
     {
         InitializeComponent();
         this.notificationController = notificationController;
         this.productController = productController;
+        this.LoggedUser = LoggedUser;
+        AddNotificationFooter.DataContext = newNotification;
 
-        this.notificationTriggeredList = this.GetTriggeredNotifications();
-
-        NotificationGridTriggeredAlerts.ItemsSource = this.notificationTriggeredList;
-        NotificationGridAllAlerts.ItemsSource = this.notificationController.GetNotifications();
+        this.GetTriggeredNotifications();
+        this.GetAllNotifications();
     }
+
     private Product? FindProduct(int ID)
     {
         return this.productController.GetProducts().Find(product => product.Id == ID);
     }
-    private List<Notification> GetTriggeredNotifications()
+
+    private void GetTriggeredNotifications()
     {
         var triggeredNotifications = this.notificationController.GetNotifications().FindAll(notification => FindProduct(notification.ProductID)?.Quantity <= notification.MinQuantity);
-        return triggeredNotifications;
+        NotificationGridTriggeredAlerts.ItemsSource = triggeredNotifications;
     }
+
+    private void GetAllNotifications()
+    {
+        NotificationGridAllAlerts.ItemsSource = this.notificationController.GetNotifications();
+    }
+
     private void SelectionBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
     {
-        if(UserControlTriggeredAlerts != null && UserControlAllAlerts != null)
+        if (UserControlTriggeredAlerts != null && UserControlAllAlerts != null)
         {
-            string text = (e.AddedItems[0] as ComboBoxItem).Content as string;
-
-            if(text == "Notificações alertas")
-            {
-                UserControlTriggeredAlerts.Visibility = Visibility.Visible;
-                UserControlAllAlerts.Visibility = Visibility.Collapsed;
-            }
-            if(text == "Todas Notificações")
-            {
-                UserControlTriggeredAlerts.Visibility = Visibility.Collapsed;
-                UserControlAllAlerts.Visibility = Visibility.Visible;
-            }
+            string? text = (e.AddedItems[0] as ComboBoxItem).Content as string;
+            ChangeVisibility(text);
         }
+    }
+
+    private void ChangeVisibility(string? comboBoxText)
+    {
+        if (comboBoxText == "Alertas")
+        {
+            UserControlTriggeredAlerts.Visibility = Visibility.Visible;
+            UserControlAllAlerts.Visibility = Visibility.Collapsed;
+            UserControlButtonsAlerts.Visibility = Visibility.Visible;
+            UserControlButtonsAllNotifications.Visibility = Visibility.Collapsed;
+        }
+        if (comboBoxText == "Notificações criadas")
+        {
+            UserControlTriggeredAlerts.Visibility = Visibility.Collapsed;
+            UserControlAllAlerts.Visibility = Visibility.Visible;
+            UserControlButtonsAlerts.Visibility = Visibility.Collapsed;
+            UserControlButtonsAllNotifications.Visibility = Visibility.Visible;
+        }
+    }
+
+    private void CreateAlert(object s, RoutedEventArgs e)
+    {
+        this.newNotification.UserID = this.LoggedUser.Id;
+        this.notificationController.AddNotification(this.newNotification);
+        this.newNotification = new();
+        this.GetAllNotifications();
+        this.GetTriggeredNotifications();
+    }
+
+    private void DeleteNotification(object s, RoutedEventArgs e)
+    {
+        var notificationToDelete = (s as FrameworkElement).DataContext as Notification;
+        this.notificationController.DeleteNotification(notificationToDelete);
+        this.GetAllNotifications();
+        this.GetTriggeredNotifications();
     }
 
     private void Save(object s, RoutedEventArgs e)
     {
         this.Close();
     }
-    private void Cancel(object s, RoutedEventArgs e)
+
+    private void Close(object s, RoutedEventArgs e)
     {
         this.Close();
     }

@@ -65,6 +65,10 @@ public partial class RegisterWindow : Window
     {
         RegisterWindowProfilePic.Cursor = Cursors.Hand;
     }
+    private void passwordBox_PasswordChanged(object sender, RoutedEventArgs e)
+    {
+        this.UserInput.Pwd = RegisterPasswordBox.Password;
+    }
 
     private void RegisterUser(object s, RoutedEventArgs e)
     {

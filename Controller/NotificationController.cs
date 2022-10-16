@@ -21,7 +21,7 @@ public class NotificationController
     }
     public void AddNotification(Notification notification)
     {
-        this.Notification.Update(notification);
+        this.Notification.Add(notification);
         this.context.SaveChanges();
     }
     public void DeleteNotification(Notification notification)

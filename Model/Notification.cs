@@ -8,7 +8,7 @@ public class Notification
 {
     [Key]
     [Column(Order = 1)]
-    public int? UserID { get; set; } = null;
+    public uint? UserID { get; set; } = null;
 
     [Key]
     [Column(Order = 2)]

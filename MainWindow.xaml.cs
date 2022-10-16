@@ -153,6 +153,10 @@ public partial class MainWindow : Window
         registerWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         registerWindow.Show();
     }
+    private void passwordBox_PasswordChanged(object sender, RoutedEventArgs e)
+    {
+        this.loginAttempt.Pwd = LoginPasswordBox.Password;
+    }
 
     private void TryLogin(object sender, RoutedEventArgs e)
     {
@@ -178,6 +182,7 @@ public partial class MainWindow : Window
         MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
         loginAttempt = new();
         LoginForm.DataContext = loginAttempt;
+        LoginPasswordBox.Password = String.Empty;
     }
 
     private void LoginVisibility(bool logged)
@@ -196,6 +201,7 @@ public partial class MainWindow : Window
     {
         loginAttempt = new();
         LoggedUser = new();
+        LoginPasswordBox.Password = String.Empty;
         LoginForm.DataContext = loginAttempt;
         MainWindowUserName.Text = LoggedUser.Name;
         this.isLogedIn = false;
@@ -222,7 +228,7 @@ public partial class MainWindow : Window
     }  
     private void ShowNotifications(object s, RoutedEventArgs e)
     {
-        NotificationWindow notifications = new NotificationWindow(this.NotificationController, this.ProductCrontroller);
+        NotificationWindow notifications = new NotificationWindow(this.NotificationController, this.ProductCrontroller, this.LoggedUser);
         notifications.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         notifications.ShowDialog();
         GetProducts();

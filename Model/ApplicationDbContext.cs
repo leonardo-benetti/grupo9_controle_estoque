@@ -73,12 +73,21 @@ public class ApplicationDbContext : DbContext
             });
 
         modelBuilder.Entity<Notification>().HasData(
-        new Notification
-        {
-            UserID = 1,
-            ProductID = 1,
-            MinQuantity = 5,
-        });
+            new Notification[]
+            {
+                new Notification
+                {
+                    UserID = 1,
+                    ProductID = 1,
+                    MinQuantity = 5,
+                },
+                new Notification
+                {
+                    UserID = 1,
+                    ProductID = 2,
+                    MinQuantity = 5,
+                }
+            });
 
         modelBuilder.Entity<Notification>().HasKey(notification => new { notification.UserID, notification.ProductID });
 
