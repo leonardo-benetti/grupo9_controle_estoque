@@ -100,13 +100,30 @@ public partial class MainWindow : MetroWindow
         string text = SearchBox.Text;
         if (text != "" && text != "Filtro")
         {
-            ProductDataGrid.ItemsSource = this.ProductCrontroller.GetProducts().FindAll(product => product.Name.Contains(text, StringComparison.OrdinalIgnoreCase)).ToArray();
+            ProductDataGrid.ItemsSource = this.ProductCrontroller.GetProducts().FindAll(product => FilterProducts(text, product)).ToArray();
         }
         else
         {
             GetProducts();
         }
     }
+
+    private bool FilterProducts(string text, Product product)
+    {
+        if (product.Name.Contains(text, StringComparison.OrdinalIgnoreCase) ||
+            product.Quantity.ToString().Contains(text, StringComparison.OrdinalIgnoreCase) ||
+            product.Description.Contains(text, StringComparison.OrdinalIgnoreCase) ||
+            product.Id.ToString().Contains(text, StringComparison.OrdinalIgnoreCase) ||
+            product.Price.ToString().Contains(text, StringComparison.OrdinalIgnoreCase))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     private void GetProducts()
     {
         ProductDataGridOff.ItemsSource = new List<Product>();
