@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:grupo9_controle_estoque"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
-        Title="EditWindow" Height="450" Width="800">
+        Title="EditWindow" Height="450" Width="800" WindowTransitionsEnabled="False">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
