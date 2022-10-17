@@ -87,7 +87,7 @@ public partial class RegisterWindow : MetroWindow
         }
         else
         {
-            MessageBox.Show("Falha no cadastro", "falha", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.Yes);
+            MessageBox.Show("Não foi possível fazer o cadastro", "falha", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.Yes);
         }
         this.Close();
     }

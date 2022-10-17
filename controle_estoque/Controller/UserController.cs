@@ -25,6 +25,9 @@ public class UserController
     {
         try
         {
+            if (this.GetUsers().Find(user => user.Name == user_name) != null)
+                return false;
+
             User newUser = new User(user_name, password, picture_path);
             this.Users.Add(newUser);
             this.context.SaveChanges();
