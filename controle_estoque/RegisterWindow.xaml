@@ -7,7 +7,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
         Title="Cadastro" Height="450" Width="400"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize" WindowTransitionsEnabled="False">
     <Grid Name="AddUserGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
