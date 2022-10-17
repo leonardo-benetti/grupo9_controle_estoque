@@ -6,12 +6,13 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System;
 using System.IO;
+using MahApps.Metro.Controls;
 
 namespace grupo9_controle_estoque;
 /// <summary>
 /// Interaction logic for NotificationWindow.xaml
 /// </summary>
-public partial class NotificationWindow : Window
+public partial class NotificationWindow : MetroWindow
 {
     private readonly string CurrentDir = Path.GetFullPath(@"..\..\..\");
     private NotificationController notificationController;

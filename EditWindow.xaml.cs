@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using grupo9_controle_estoque.Model;
 using grupo9_controle_estoque.Controller;
 using System.Windows;
-
+using MahApps.Metro.Controls;
 
 namespace grupo9_controle_estoque;
 /// <summary>
 /// Interaction logic for EditWindow.xaml
 /// </summary>
-public partial class EditWindow : Window
+public partial class EditWindow : MetroWindow
 {
     private Product product;
     private Product newProduct;

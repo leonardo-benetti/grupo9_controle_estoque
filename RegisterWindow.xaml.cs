@@ -1,4 +1,5 @@
 ﻿using grupo9_controle_estoque.Controller;
+using MahApps.Metro.Controls;
 using Microsoft.Win32;
 using System;
 using System.IO;
@@ -11,7 +12,7 @@ namespace grupo9_controle_estoque;
 /// <summary>
 /// Interaction logic for RegisterWindow.xaml
 /// </summary>
-public partial class RegisterWindow : Window
+public partial class RegisterWindow : MetroWindow
 {
 
     private string profilePicturesDir = Path.Combine(Path.GetFullPath(@"..\..\..\"), "PersistentData", "ProfilePictures");

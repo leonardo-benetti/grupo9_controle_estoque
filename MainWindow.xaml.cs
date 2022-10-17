@@ -9,12 +9,13 @@ using System.Threading;
 using ClosedXML.Excel;
 using DocumentFormat.OpenXml.Wordprocessing;
 using System.Drawing;
+using MahApps.Metro.Controls;
 
 namespace grupo9_controle_estoque;
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>
-public partial class MainWindow : Window
+public partial class MainWindow : MetroWindow
 {
     private readonly ApplicationDbContext context;
     private readonly UserController UserController;

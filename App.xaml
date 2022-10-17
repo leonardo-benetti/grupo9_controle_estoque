@@ -4,11 +4,10 @@
              xmlns:local="clr-namespace:grupo9_controle_estoque"
              Startup="OnStartup">
     <Application.Resources>
-        <Style x:Key="FilterBox" TargetType="TextBox">
-            <Setter Property="Foreground" Value="Gray"/>
-        </Style>
-        <Style x:Key="NotifyButton" TargetType="Button">
-            <Setter Property="Foreground" Value="Gray"/>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/ControleEstoque.Themes;component/Themes.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
