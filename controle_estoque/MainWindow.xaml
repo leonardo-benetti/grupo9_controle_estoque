@@ -19,14 +19,14 @@
 
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
                 <!-- title -->
-                <RowDefinition Height="30"/>
+                <RowDefinition Height="50"/>
                 <!-- SearchBox -->
-                <RowDefinition/>
+                <RowDefinition Height="30"/>
                 <!-- data -->
-                <RowDefinition Height="60"/>
+                <RowDefinition/>
                 <!-- data footer-->
+                <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
             
             <Label FontSize="20" 
@@ -47,41 +47,44 @@
             </Grid>
             <UserControl Name="UserControlProductsIn" Grid.Row="2" Margin="0" Visibility="Collapsed">
                 <StackPanel Grid.Row="2" Margin="5">
-                    <DataGrid x:Name="ProductDataGrid" AutoGenerateColumns="False" IsReadOnly="True"
+                    <Border BorderThickness="1" BorderBrush="Black" CornerRadius="5" Margin="10">
+                        <DataGrid x:Name="ProductDataGrid" AutoGenerateColumns="False" IsReadOnly="True"
                                   ColumnWidth="*" Margin="5" IsSynchronizedWithCurrentItem="True">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="40"/>
-                            <DataGridTextColumn Header="Nome" Binding="{Binding Name}"/>
-                            <DataGridTextColumn Header="Categoria" Binding="{Binding Category}"/>
-                            <DataGridTextColumn Header="Preço" Binding="{Binding Price}"/>
-                            <DataGridTextColumn Header="Quantidade" Binding="{Binding Quantity}"/>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50" MinWidth="50"/>
+                                <DataGridTextColumn Header="Nome" Binding="{Binding Name}" Width="*" MinWidth="60"/>
+                                <DataGridTextColumn Header="Categoria" Binding="{Binding Category}" Width="*" MinWidth="90"/>
+                                <DataGridTextColumn Header="Preço" Binding="{Binding Price}" Width="*" MinWidth="60"/>
+                                <DataGridTextColumn Header="Quantidade" Binding="{Binding Quantity}" Width="*" MinWidth="100" />
 
-                            <DataGridTemplateColumn Header="Ver descrição" MaxWidth="80">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button Content="?" Click="SelectProductToSeeDescription"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Ver descrição" MaxWidth="115" MinWidth="115">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Content="?" Click="SelectProductToSeeDescription"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Selecionar" MaxWidth="80">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button Content="Selecionar" Click="SelectProductToEdit"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Selecionar" MaxWidth="95" MinWidth="95">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Content="Selecionar" Click="SelectProductToEdit"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Deletar" MaxWidth="80">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button Content="Deletar" Click="DeleteProduct"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Deletar" MaxWidth="70" MinWidth="70">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Content="Deletar" Click="DeleteProduct"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
 
-                        </DataGrid.Columns>
-                    </DataGrid>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+                        
                 </StackPanel>
             </UserControl>
             <UserControl Name="UserControlProductsOff" Grid.Row="2" Margin="0" Visibility="Visible">
@@ -89,13 +92,13 @@
                     <DataGrid x:Name="ProductDataGridOff" AutoGenerateColumns="False" IsReadOnly="True"
                                   ColumnWidth="*" Margin="5" IsSynchronizedWithCurrentItem="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="40"/>
-                            <DataGridTextColumn Header="Nome" Binding="{Binding Name}"/>
-                            <DataGridTextColumn Header="Categoria" Binding="{Binding Category}"/>
-                            <DataGridTextColumn Header="Preço" Binding="{Binding Price}"/>
-                            <DataGridTextColumn Header="Quantidade" Binding="{Binding Quantity}"/>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50" MinWidth="50"/>
+                            <DataGridTextColumn Header="Nome" Binding="{Binding Name}" Width="*" MinWidth="60"/>
+                            <DataGridTextColumn Header="Categoria" Binding="{Binding Category}" Width="*" MinWidth="90"/>
+                            <DataGridTextColumn Header="Preço" Binding="{Binding Price}" Width="*" MinWidth="60"/>
+                            <DataGridTextColumn Header="Quantidade" Binding="{Binding Quantity}" Width="*" MinWidth="100" />
 
-                            <DataGridTemplateColumn Header="Ver descrição" MaxWidth="80">
+                            <DataGridTemplateColumn Header="Ver descrição" MaxWidth="115" MinWidth="115">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Button Content="?" Click="SelectProductToSeeDescription"/>
@@ -103,7 +106,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Selecionar" MaxWidth="80">
+                            <DataGridTemplateColumn Header="Selecionar" MaxWidth="95" MinWidth="95">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Button Content="Selecionar" Click="SelectProductToEdit"/>
@@ -111,7 +114,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Deletar" MaxWidth="80">
+                            <DataGridTemplateColumn Header="Deletar" MaxWidth="70" MinWidth="70">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Button Content="Deletar" Click="DeleteProduct"/>
@@ -155,12 +158,12 @@
 
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition/>
                 <!-- user data -->
-                <RowDefinition Height="200"/>
+                <RowDefinition/>
                 <!-- control -->
-                <RowDefinition Height="30"/>
+                <RowDefinition Height="220"/>
                 <!-- user footer-->
+                <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0">
@@ -182,23 +185,23 @@
                     <Image Grid.Column="1" 
                        Name="MainWindowProfilePic"
                        Height="70" Width="70"
-                       Margin="5,20,5,5"
+                       Margin="5,10,5,5"
                        />
                 </Grid>
-                <Border Margin="10,5,10,5" BorderThickness="1" BorderBrush="Black">
+                <Border Margin="10,5,10,5" BorderThickness="1" BorderBrush="Black" CornerRadius="10">
                     <TextBlock Name="MainWindowUserName" Padding="0,5,0,5" HorizontalAlignment="Center" Text="{Binding Name}"/>
                 </Border>
 
                 <UserControl Name="UserControlLoggedIn" Grid.Row="0" Visibility="Collapsed">
                     <StackPanel>
-                        <Button Content="Logout" Width="50" Margin="0,5,0,5" Click="Logout"/>
+                        <Button Content="Logout" Width="80" Margin="0,5,0,5" Click="Logout"/>
                     </StackPanel>
                 </UserControl>
 
 
                 <UserControl Name="UserControlLoggedOff" Grid.Row="0" Margin="5" Visibility="Visible">
                     <StackPanel>
-                        <Label Content="Forneça suas credenciais" FontSize="10" HorizontalAlignment="Left"/>
+                        <Label Content="Forneça suas credenciais" FontSize="12" FontWeight="SemiBold" HorizontalAlignment="Left"/>
                         <Grid Name="LoginForm">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
@@ -206,27 +209,26 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <Label Grid.Row="0" FontSize="10" Grid.Column="0" Content="username"/>
-                            <TextBox Grid.Row="0" FontSize="10" Grid.Column="1" VerticalContentAlignment="Center" Text="{Binding Name}"/>
+                            <Label Grid.Row="0" FontSize="10" Grid.Column="0" Content="Username"/>
+                            <TextBox Grid.Row="0" Margin="1" FontSize="10" Grid.Column="1" VerticalContentAlignment="Center" Text="{Binding Name}"/>
 
-                            <Label Grid.Row="1" FontSize="10" Grid.Column="0" Content="senha"/>
-                            <PasswordBox Grid.Row="1" FontSize="10" Grid.Column="1" VerticalContentAlignment="Center"
-                                x:Name="LoginPasswordBox" Width="200" MaxLength="16"
+                            <Label Grid.Row="1" FontSize="10" Grid.Column="0" Content="Senha"/>
+                            <PasswordBox Grid.Row="1"  Margin="1" FontSize="10" Grid.Column="1" VerticalContentAlignment="Center"
+                                x:Name="LoginPasswordBox" MaxLength="16"
                                 PasswordChanged="passwordBox_PasswordChanged"/>
 
                             <Button Grid.Row="2" FontSize="10" Grid.ColumnSpan="2" VerticalContentAlignment="Center" Width="80" Content="login"
-                                Margin="10"
+                                Margin="0,5,0,10"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 Click="TryLogin"/>
                         </Grid>
-                        <Label Content="Não possui cadastro?" FontSize="10" HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
+                        <Label Content="Não possui cadastro?" FontSize="11" FontWeight="SemiBold" HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
                         <Button FontSize="10" Grid.Column="1"  Width="80" Content="Cadastre-se"
-                                Margin="10"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 VerticalContentAlignment="Center"
@@ -283,9 +285,10 @@
 
             <UserControl Name="UserControlExportButton" Grid.Row="2" Visibility="Collapsed">
                 <Button 
-                   Name="MainWindowHelpButton"
+                   Name="ExportButton"
                    Content="Exportar"
                    FontSize="10"
+                   Height="30"
                    VerticalContentAlignment="Center"
                    HorizontalContentAlignment="Center"
                    HorizontalAlignment="Left"
@@ -293,10 +296,13 @@
                    Click="ExportExcel"/>
             </UserControl>
 
+            <Border Grid.Row="2" BorderThickness="0.5" BorderBrush="Black"/>
             <Button Grid.Row="2"
-                   Name="ExportButton"
+                   Name="MainWindowHelpButton"
                    Content="Ajuda"
                    FontSize="10"
+                   Height="30"
+                   Width="50"
                    VerticalContentAlignment="Center"
                    HorizontalContentAlignment="Center"
                    HorizontalAlignment="Right"
