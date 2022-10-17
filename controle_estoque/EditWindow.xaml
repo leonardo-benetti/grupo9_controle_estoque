@@ -23,16 +23,18 @@
                Content="Editar Produto"/>
 
         <StackPanel Grid.Row="1">
-            <DataGrid x:Name="ProductEditGrid" AutoGenerateColumns="False" IsReadOnly="False"
+            <Border BorderThickness="1" BorderBrush="Black" CornerRadius="5" Margin="10">
+                <DataGrid x:Name="ProductEditGrid" AutoGenerateColumns="False" IsReadOnly="False"
                 CanUserAddRows="False" ColumnWidth="*" Margin="5" IsSynchronizedWithCurrentItem="True">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Nome" Binding="{Binding Name}"/>
-                    <DataGridTextColumn Header="Categoria" Binding="{Binding Category}"/>
-                    <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
-                    <DataGridTextColumn Header="Preço" Binding="{Binding Price}"/>
-                    <DataGridTextColumn Header="Quantidade" Binding="{Binding Quantity}"/>
-                </DataGrid.Columns>
-            </DataGrid>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Nome" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Header="Categoria" Binding="{Binding Category}"/>
+                        <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
+                        <DataGridTextColumn Header="Preço" Binding="{Binding Price}"/>
+                        <DataGridTextColumn Header="Quantidade" Binding="{Binding Quantity}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
         </StackPanel>
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>

@@ -10,7 +10,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
-            <RowDefinition Height="25"/>
+            <RowDefinition Height="30"/>
             <RowDefinition/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
@@ -22,59 +22,44 @@
                Margin="1"
                Grid.Row="0"
                Content="Notificações"/>
-        <ComboBox Name="SelectionBox" Grid.Row="1" Width="150" Height="22" 
-                  HorizontalAlignment="Left" Margin="5,1,0,1" SelectedIndex="0" VerticalAlignment="Top" SelectionChanged="SelectionBox_SelectionChanged">
+        <ComboBox Name="SelectionBox" Grid.Row="1" Width="150" Height="25"
+                  HorizontalAlignment="Left" Margin="10,1,0,1" SelectedIndex="0" VerticalAlignment="Top" SelectionChanged="SelectionBox_SelectionChanged">
             <ComboBoxItem Content="Alertas"/>
             <ComboBoxItem Content="Notificações criadas"/>
         </ComboBox>
         <UserControl Name="UserControlTriggeredAlerts" Grid.Row="2" Visibility="Visible">
             <StackPanel>
-                <DataGrid x:Name="NotificationGridTriggeredAlerts" AutoGenerateColumns="False" IsReadOnly="False"
+                <Border BorderThickness="1" BorderBrush="Black" CornerRadius="5" Margin="10">
+                    <DataGrid x:Name="NotificationGridTriggeredAlerts" AutoGenerateColumns="False" IsReadOnly="False"
                 CanUserAddRows="False" ColumnWidth="*" Margin="5" IsSynchronizedWithCurrentItem="True">
-                    <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="Status" MaxWidth="50">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Image
-                                       Name="AlertPic"
-                                       Source="PersistentData/Icons/alertIcon.png"
-                                       Height="10" Width="10"
-                                       Margin="0"
-                                       />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="Id Usuário" Binding="{Binding UserID}"/>
-                        <DataGridTextColumn Header="Id Produto" Binding="{Binding ProductID}"/>
-                        <DataGridTextColumn Header="Quantidade Mínima" Binding="{Binding MinQuantity}"/>
-                    </DataGrid.Columns>
-                </DataGrid>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id Usuário" Binding="{Binding UserID}"/>
+                            <DataGridTextColumn Header="Id Produto" Binding="{Binding ProductID}"/>
+                            <DataGridTextColumn Header="Quantidade Mínima" Binding="{Binding MinQuantity}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
             </StackPanel>
         </UserControl>
         <UserControl Name="UserControlAllAlerts" Grid.Row="2" Visibility="Collapsed">
             <StackPanel>
-                <DataGrid x:Name="NotificationGridAllAlerts" AutoGenerateColumns="False" IsReadOnly="False"
+                <Border BorderThickness="1" BorderBrush="Black" CornerRadius="5" Margin="10">
+                    <DataGrid x:Name="NotificationGridAllAlerts" AutoGenerateColumns="False" IsReadOnly="False"
                 CanUserAddRows="False" ColumnWidth="*" Margin="5" IsSynchronizedWithCurrentItem="True">
-                    <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="Status" MaxWidth="50">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="Id Usuário" Binding="{Binding UserID}"/>
-                        <DataGridTextColumn Header="Id Produto" Binding="{Binding ProductID}"/>
-                        <DataGridTextColumn Header="Quantidade Mínima" Binding="{Binding MinQuantity}"/>
-                        <DataGridTemplateColumn Header="Deletar" MaxWidth="80">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button Content="Deletar" Click="DeleteNotification"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id Usuário" Binding="{Binding UserID}"/>
+                            <DataGridTextColumn Header="Id Produto" Binding="{Binding ProductID}"/>
+                            <DataGridTextColumn Header="Quantidade Mínima" Binding="{Binding MinQuantity}"/>
+                            <DataGridTemplateColumn Header="Deletar" MaxWidth="80">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="Deletar" Click="DeleteNotification"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
             </StackPanel>
         </UserControl>
         <Grid Grid.Row="3">
@@ -93,22 +78,22 @@
                     <Label FontSize="12" Content="ID Produto:" VerticalAlignment="Center"
                            VerticalContentAlignment="Center"
                            Margin="10,0,0,0"/>
-                    <TextBox Width="50" Height="20" 
+                    <TextBox Width="50" Height="15" 
                              VerticalContentAlignment="Center" Margin="0" 
                              Text="{Binding ProductID}"/>
 
                     <Label FontSize="12" Content="Quantidade mínima:" VerticalAlignment="Center"
                            VerticalContentAlignment="Center" Margin="10,0,0,0"/>
-                    <TextBox Width="50" Height="20"
+                    <TextBox Width="50" Height="15"
                              VerticalContentAlignment="Center" Margin="0" 
                              Text="{Binding MinQuantity}"/>
 
                     <Button Height="20" Width="50"
-                            Margin="20,0,0,0"
+                            Margin="40,0,0,0"
                             Content="Criar" Click="CreateAlert"/>
 
                     <Button Height="20" Width="50"
-                            Margin="20,0,0,0"
+                            Margin="30,0,0,0"
                             Content="Fechar" Click="Close"/>
                 </StackPanel>
             </UserControl>
