@@ -4,6 +4,7 @@ using grupo9_controle_estoque.Model;
 using grupo9_controle_estoque.Controller;
 using System.Windows;
 using MahApps.Metro.Controls;
+using ControlzEx.Theming;
 
 namespace grupo9_controle_estoque;
 /// <summary>
@@ -15,7 +16,7 @@ public partial class EditWindow : MetroWindow
     private Product newProduct;
     private ProductController productController;
     private List<Product> productList;
-    public EditWindow(Product product, ProductController productController)
+    public EditWindow(Product product, ProductController productController, Theme? theme)
     {
         this.product = product;
         this.productController = productController;
@@ -28,6 +29,8 @@ public partial class EditWindow : MetroWindow
             Description = product.Description
         };
         InitializeComponent();
+        if (theme != null)
+            ThemeManager.Current.ChangeTheme(this, theme);
         this.productList = new List<Product>();
         this.productList.Add(newProduct);
         ProductEditGrid.ItemsSource = this.productList;

@@ -1,4 +1,5 @@
-﻿using grupo9_controle_estoque.Controller;
+﻿using ControlzEx.Theming;
+using grupo9_controle_estoque.Controller;
 using MahApps.Metro.Controls;
 using Microsoft.Win32;
 using System;
@@ -29,10 +30,12 @@ public partial class RegisterWindow : MetroWindow
 
     private UserController userController;
 
-    public RegisterWindow(UserController userController)
+    public RegisterWindow(UserController userController, Theme? theme)
     {
         this.userController = userController;
         InitializeComponent();
+        if (theme != null)
+            ThemeManager.Current.ChangeTheme(this, theme);
         imagePath = Path.Combine(profilePicturesDir, "unknown_user.jpg");
         loadImage();
         AddUserGrid.DataContext = UserInput;

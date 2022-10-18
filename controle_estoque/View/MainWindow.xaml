@@ -14,8 +14,8 @@
             <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Column="0" BorderThickness="0.5" BorderBrush="Gray"/>
-        <Border Grid.Column="1" BorderThickness="0.5" BorderBrush="Gray"/>
+        <Border Grid.Column="0" BorderThickness="0.5" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
+        <Border Grid.Column="1" BorderThickness="0.5" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
 
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
@@ -28,9 +28,10 @@
                 <!-- data footer-->
                 <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
-            
-            <Label FontSize="20" 
-                FontWeight="Bold"
+
+            <Label FontSize="22"
+                FontWeight="DemiBold"
+                FontFamily="Arial"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 Margin="5"
@@ -47,7 +48,7 @@
             </Grid>
             <UserControl Name="UserControlProductsIn" Grid.Row="2" Margin="0" Visibility="Collapsed">
                 <StackPanel Grid.Row="2" Margin="5">
-                    <Border BorderThickness="1" BorderBrush="Black" CornerRadius="5" Margin="10">
+                    <Border BorderThickness="1" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}" CornerRadius="5" Margin="10">
                         <DataGrid x:Name="ProductDataGrid" AutoGenerateColumns="False" IsReadOnly="True"
                                   ColumnWidth="*" Margin="5" IsSynchronizedWithCurrentItem="True">
                             <DataGrid.Columns>
@@ -127,7 +128,7 @@
                 </StackPanel>
             </UserControl>
 
-            <Border Grid.Row="3" BorderThickness="0.5" BorderBrush="Gray"/>
+            <Border Grid.Row="3" BorderThickness="0.5" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
             <UserControl Name="UserControlSellProduct" Grid.Row="3" Visibility="Collapsed">
                 <StackPanel Orientation="Horizontal" Name="SellProductFooter">
                     <Label FontSize="12" Content="Venda de Produtos" VerticalAlignment="Center"
@@ -177,7 +178,7 @@
                         <Button 
                         Name="NotifyButton" Click="ShowNotifications"
                         HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10" 
-                        Width="25" Height="25" Background="Transparent">
+                        Width="25" Height="25" Background="LightGray">
                             <Image HorizontalAlignment="Center" VerticalAlignment="Center" 
                             Width="20" Height="20" Name="NotifyImage"/>
                         </Button>
@@ -188,7 +189,7 @@
                        Margin="5,10,5,5"
                        />
                 </Grid>
-                <Border Margin="10,5,10,5" BorderThickness="1" BorderBrush="Black" CornerRadius="10">
+                <Border Margin="10,5,10,5" BorderThickness="1" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}" CornerRadius="10">
                     <TextBlock Name="MainWindowUserName" Padding="0,5,0,5" HorizontalAlignment="Center" Text="{Binding Name}"/>
                 </Border>
 
@@ -238,7 +239,7 @@
             </StackPanel>
 
             <UserControl Name="UserControlInsertProduct" Grid.Row="1" Visibility="Collapsed">
-                <Border Margin="5" BorderThickness="1" BorderBrush="Black">
+                <Border Margin="5" BorderThickness="1" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}">
                     <StackPanel Margin="5" VerticalAlignment="Bottom">
                         <Label Content="Inserir Produto" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center"/>
                         <Grid Name="AddItemGrid">
@@ -296,17 +297,17 @@
                    Click="ExportExcel"/>
             </UserControl>
 
-            <Border Grid.Row="2" BorderThickness="0.5" BorderBrush="Gray"/>
+            <Border Grid.Row="2" BorderThickness="0.5" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"/>
             <Button Grid.Row="2"
-                   Name="MainWindowHelpButton"
-                   Content="Ajuda"
+                   Name="MainWindowThemeButton"
+                   Content="Tema"
                    FontSize="10"
                    Height="30"
                    Width="50"
                    VerticalContentAlignment="Center"
                    HorizontalContentAlignment="Center"
                    HorizontalAlignment="Right"
-                   Margin="5"/>
+                   Margin="5" Click="MainWindowThemeButton_Click"/>
 
         </Grid>
     </Grid>
