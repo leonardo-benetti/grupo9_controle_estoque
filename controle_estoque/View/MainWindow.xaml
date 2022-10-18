@@ -14,8 +14,8 @@
             <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Column="0" BorderThickness="1" BorderBrush="Black"/>
-        <Border Grid.Column="1" BorderThickness="1" BorderBrush="Black"/>
+        <Border Grid.Column="0" BorderThickness="0.5" BorderBrush="Gray"/>
+        <Border Grid.Column="1" BorderThickness="0.5" BorderBrush="Gray"/>
 
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
@@ -127,7 +127,7 @@
                 </StackPanel>
             </UserControl>
 
-            <Border Grid.Row="3" BorderThickness="0.5" BorderBrush="Black"/>
+            <Border Grid.Row="3" BorderThickness="0.5" BorderBrush="Gray"/>
             <UserControl Name="UserControlSellProduct" Grid.Row="3" Visibility="Collapsed">
                 <StackPanel Orientation="Horizontal" Name="SellProductFooter">
                     <Label FontSize="12" Content="Venda de Produtos" VerticalAlignment="Center"
@@ -296,7 +296,7 @@
                    Click="ExportExcel"/>
             </UserControl>
 
-            <Border Grid.Row="2" BorderThickness="0.5" BorderBrush="Black"/>
+            <Border Grid.Row="2" BorderThickness="0.5" BorderBrush="Gray"/>
             <Button Grid.Row="2"
                    Name="MainWindowHelpButton"
                    Content="Ajuda"
