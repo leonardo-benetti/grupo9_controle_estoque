@@ -141,7 +141,11 @@ public partial class MainWindow : MetroWindow
     private void DeleteProduct(object s, RoutedEventArgs e)
     {
         var productToDelete = (s as FrameworkElement).DataContext as Product;
-        this.ProductCrontroller.DeleteProduct(productToDelete);
+        MessageBoxResult messageBoxResult = MessageBox.Show(
+            $"Deseja mesmo deletar o produto {productToDelete.Name} ({productToDelete.Id})?",
+            "Delete Confirmation", System.Windows.MessageBoxButton.YesNo);
+        if (messageBoxResult == MessageBoxResult.Yes)
+            this.ProductCrontroller.DeleteProduct(productToDelete);
         GetProducts();
     }
     private void AddItem(object s, RoutedEventArgs e)
