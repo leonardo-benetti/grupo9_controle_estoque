@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <Folder Include="PersistentData\DB\" />
-    <Folder Include="View\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +20,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="System.ComponentModel" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="App.xaml" />
   </ItemGroup>
 
   <ItemGroup>

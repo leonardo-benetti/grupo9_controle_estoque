@@ -26,7 +26,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Border Grid.Row="0" BorderThickness="1" BorderBrush="Black" CornerRadius="5" Margin="10">
+            <Border Grid.Row="0" BorderThickness="1" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}" CornerRadius="5" Margin="10">
                 <TextBlock FontSize="16" Padding="0,5,0,5" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Description}"/>
             </Border>
         </Grid>

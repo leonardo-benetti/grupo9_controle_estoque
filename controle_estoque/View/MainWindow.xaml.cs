@@ -10,6 +10,7 @@ using ClosedXML.Excel;
 using DocumentFormat.OpenXml.Wordprocessing;
 using System.Drawing;
 using MahApps.Metro.Controls;
+using ControlzEx.Theming;
 
 namespace grupo9_controle_estoque;
 /// <summary>
@@ -141,7 +142,11 @@ public partial class MainWindow : MetroWindow
     private void DeleteProduct(object s, RoutedEventArgs e)
     {
         var productToDelete = (s as FrameworkElement).DataContext as Product;
-        this.ProductCrontroller.DeleteProduct(productToDelete);
+        MessageBoxResult messageBoxResult = MessageBox.Show(
+            $"Deseja mesmo deletar o produto {productToDelete.Name} ({productToDelete.Id})?",
+            "Delete Confirmation", System.Windows.MessageBoxButton.YesNo);
+        if (messageBoxResult == MessageBoxResult.Yes)
+            this.ProductCrontroller.DeleteProduct(productToDelete);
         GetProducts();
     }
     private void AddItem(object s, RoutedEventArgs e)
@@ -167,7 +172,7 @@ public partial class MainWindow : MetroWindow
     }
     private void AddUser(object s, RoutedEventArgs e)
     {
-        RegisterWindow registerWindow = new RegisterWindow(this.UserController);
+        RegisterWindow registerWindow = new RegisterWindow(this.UserController, ThemeManager.Current.DetectTheme(this));
         registerWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         registerWindow.Show();
     }
@@ -231,7 +236,7 @@ public partial class MainWindow : MetroWindow
     private void SelectProductToSeeDescription(object s, RoutedEventArgs e)
     {
         var productDescription = (s as FrameworkElement).DataContext as Product;
-        Description windowDescription = new Description(productDescription);
+        Description windowDescription = new Description(productDescription, ThemeManager.Current.DetectTheme(this));
         windowDescription.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         windowDescription.Show();
     }
@@ -239,14 +244,14 @@ public partial class MainWindow : MetroWindow
     private void SelectProductToEdit(object s, RoutedEventArgs e)
     {
         var productToEdit = (s as FrameworkElement).DataContext as Product;
-        EditWindow editWindow = new EditWindow(productToEdit, this.ProductCrontroller);
+        EditWindow editWindow = new EditWindow(productToEdit, this.ProductCrontroller, ThemeManager.Current.DetectTheme(this));
         editWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         editWindow.ShowDialog();
         GetProducts();
     }  
     private void ShowNotifications(object s, RoutedEventArgs e)
     {
-        NotificationWindow notifications = new NotificationWindow(this.NotificationController, this.ProductCrontroller, this.LoggedUser);
+        NotificationWindow notifications = new NotificationWindow(this.NotificationController, this.ProductCrontroller, this.LoggedUser, ThemeManager.Current.DetectTheme(this));
         notifications.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         notifications.ShowDialog();
         GetProducts();
@@ -305,5 +310,18 @@ public partial class MainWindow : MetroWindow
         SellProductFooter.DataContext = sellProductData;
     }
 
+    private void MainWindowThemeButton_Click(object sender, RoutedEventArgs e)
+    {
+        var currentTheme = ThemeManager.Current.DetectTheme(this);
+
+        if (currentTheme != null && currentTheme.BaseColorScheme == "Light")
+        {
+            ThemeManager.Current.ChangeThemeBaseColor(this, "Dark");
+        }
+        else
+        {
+            ThemeManager.Current.ChangeThemeBaseColor(this, "Light");
+        }
+    }
 }
 

@@ -23,7 +23,7 @@
                Content="Editar Produto"/>
 
         <StackPanel Grid.Row="1">
-            <Border BorderThickness="1" BorderBrush="Black" CornerRadius="5" Margin="10">
+            <Border BorderThickness="1" BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}" CornerRadius="5" Margin="10">
                 <DataGrid x:Name="ProductEditGrid" AutoGenerateColumns="False" IsReadOnly="False"
                 CanUserAddRows="False" ColumnWidth="*" Margin="5" IsSynchronizedWithCurrentItem="True">
                     <DataGrid.Columns>
