@@ -369,3 +369,7 @@ FodyWeavers.xsd
 
 # Excel files
 *.xlsx
+
+# Image files
+*.png
+*.jpg

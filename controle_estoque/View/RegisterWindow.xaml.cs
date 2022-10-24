@@ -1,4 +1,6 @@
-﻿using grupo9_controle_estoque.Controller;
+﻿using ControlzEx.Theming;
+using grupo9_controle_estoque.Controller;
+using MahApps.Metro.Controls;
 using Microsoft.Win32;
 using System;
 using System.IO;
@@ -11,7 +13,7 @@ namespace grupo9_controle_estoque;
 /// <summary>
 /// Interaction logic for RegisterWindow.xaml
 /// </summary>
-public partial class RegisterWindow : Window
+public partial class RegisterWindow : MetroWindow
 {
 
     private string profilePicturesDir = Path.Combine(Path.GetFullPath(@"..\..\..\"), "PersistentData", "ProfilePictures");
@@ -28,10 +30,12 @@ public partial class RegisterWindow : Window
 
     private UserController userController;
 
-    public RegisterWindow(UserController userController)
+    public RegisterWindow(UserController userController, Theme? theme)
     {
         this.userController = userController;
         InitializeComponent();
+        if (theme != null)
+            ThemeManager.Current.ChangeTheme(this, theme);
         imagePath = Path.Combine(profilePicturesDir, "unknown_user.jpg");
         loadImage();
         AddUserGrid.DataContext = UserInput;
@@ -86,7 +90,7 @@ public partial class RegisterWindow : Window
         }
         else
         {
-            MessageBox.Show("Falha no cadastro", "falha", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.Yes);
+            MessageBox.Show("Não foi possível fazer o cadastro", "falha", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.Yes);
         }
         this.Close();
     }
